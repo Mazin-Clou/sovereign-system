@@ -3,208 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المنظومة السيادية العليا | MAZIN-113255</title>
+    <title>منظومة السيادة المطلقة | MAZIN-113255</title>
     <style>
         :root {
-            --gold: #d4af37; --red: #ff3030; --cyan: #00f3ff;
-            --bg: #010409; --glass: rgba(0, 15, 30, 0.85);
+            --gold: #d4af37; --red: #ff2e2e; --cyan: #00f3ff;
+            --bg: #010409; --glass: rgba(0, 15, 30, 0.95);
             --border: rgba(0, 243, 255, 0.3);
         }
-
         body {
             background: var(--bg); color: var(--gold);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0; overflow-x: hidden;
-            background-image: 
-                linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)),
-                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            margin: 0; padding: 0; overflow-x: hidden;
+            background-image: radial-gradient(circle at center, #001529 0%, #000 100%);
         }
-
-        /* القائمة العلوية المحكمة */
+        /* القائمة العلوية الثابتة */
         .top-nav {
-            position: fixed; top: 0; width: 100%; height: 60px;
-            background: var(--glass); backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--cyan); z-index: 1000;
-            display: flex; justify-content: center; align-items: center; gap: 30px;
+            position: fixed; top: 0; width: 100%; height: 65px;
+            background: var(--glass); backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--cyan); z-index: 9999;
+            display: flex; justify-content: center; align-items: center; gap: 25px;
         }
+        .nav-link { color: var(--cyan); text-decoration: none; font-weight: bold; font-size: 0.9rem; cursor: pointer; transition: 0.3s; }
+        .nav-link:hover { text-shadow: 0 0 10px var(--cyan); color: #fff; }
 
-        .nav-link {
-            color: var(--cyan); text-decoration: none; font-weight: bold;
-            text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
-            transition: 0.3s; cursor: pointer;
-        }
-
-        .nav-link:hover { color: #fff; text-shadow: 0 0 10px var(--cyan); }
-
-        /* رأس الصفحة الرقمي */
-        .hero {
-            padding: 120px 20px 60px; text-align: center;
-            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
-        }
-
-        .scanner-line {
-            width: 100%; height: 2px; background: var(--cyan);
-            position: absolute; top: 0; left: 0; opacity: 0.5;
-            animation: scan-move 4s linear infinite;
-        }
-
-        @keyframes scan-move { 0% { top: 0; } 100% { top: 100vh; } }
-
-        /* شبكة الأزرار المتخلخلة */
+        .hero { padding: 130px 20px 50px; text-align: center; position: relative; }
+        
+        /* شبكة الأزرار المخلخلة */
         .ops-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px; max-width: 1100px; margin: 0 auto 40px; padding: 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px; max-width: 1200px; margin: 0 auto; padding: 20px;
         }
-
         .op-btn {
-            background: rgba(0, 20, 40, 0.6); border: 1px solid var(--border);
-            padding: 15px; color: var(--cyan); font-size: 0.8rem;
-            cursor: pointer; transition: 0.4s; position: relative; overflow: hidden;
+            background: rgba(0, 30, 60, 0.5); border: 1px solid var(--border);
+            padding: 15px; color: var(--cyan); font-family: 'Courier New', monospace;
+            cursor: pointer; transition: 0.4s; position: relative;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
         }
+        .op-btn:hover { background: var(--cyan); color: #000; box-shadow: 0 0 25px var(--cyan); transform: scale(1.05); }
 
-        .op-btn::before {
-            content: ''; position: absolute; top: 0; left: -100%;
-            width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(0,243,255,0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .op-btn:hover::before { left: 100%; }
-        .op-btn:hover { border-color: var(--cyan); box-shadow: 0 0 15px var(--cyan); transform: translateY(-3px); }
-
-        /* الحاويات الرئيسية */
         .container {
-            max-width: 1000px; margin: 20px auto; padding: 40px;
+            max-width: 1100px; margin: 30px auto; padding: 45px;
             background: var(--glass); border: 1px solid var(--border);
-            box-shadow: 0 0 30px rgba(0,0,0,0.5); display: none;
-            animation: fadeIn 0.6s ease;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            display: none; animation: fadeIn 0.5s ease-out;
+            position: relative; backdrop-filter: blur(10px);
         }
-
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
-
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .active-sec { display: block; }
 
-        /* تنسيق المواد */
-        .mat-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
+        /* تنسيق الأرشيف الدستوري */
+        .mat-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
         .m-num {
-            width: 50px; height: 50px; border: 1px solid var(--gold);
+            width: 55px; height: 55px; border: 1px solid var(--gold);
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer; font-weight: bold; transition: 0.3s;
+            cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: 0.3s;
         }
-        .m-num:hover, .m-num.active { background: var(--gold); color: #000; }
+        .m-num:hover, .m-num.active { background: var(--gold); color: #000; box-shadow: 0 0 15px var(--gold); }
+        .detail-card { background: rgba(0,0,0,0.7); border-right: 5px solid var(--cyan); padding: 30px; line-height: 2; border-radius: 0 10px 10px 0; }
 
-        .detail-card {
-            background: rgba(0,0,0,0.6); border-right: 4px solid var(--cyan);
-            padding: 25px; line-height: 1.8;
-        }
+        /* الاستخبارات والتحكم */
+        .admin-card { background: rgba(255,255,255,0.03); border: 1px solid #222; padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--gold); }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--cyan); color: var(--gold); outline: none; }
+        
+        .badge { background: var(--red); color: white; padding: 2px 8px; font-size: 0.7rem; border-radius: 4px; }
+        .status-feed { font-family: monospace; color: #0f0; background: #000; padding: 15px; border-radius: 5px; height: 150px; overflow-y: auto; font-size: 0.8rem; border: 1px solid #111; }
     </style>
 </head>
 <body>
 
-<div class="scanner-line"></div>
-
 <nav class="top-nav">
     <div class="nav-link" onclick="showSec('home')">🏠 الرئيسية</div>
-    <div class="nav-link" onclick="showSec('constitution')">⚖️ الدستور السيادي</div>
+    <div class="nav-link" onclick="showSec('constitution')">📜 الأرشيف الدستوري</div>
     <div class="nav-link" onclick="showSec('services')">🛠️ الخدمات</div>
-    <div class="nav-link" style="color:var(--red)" onclick="alert('بروتوكول الطوارئ مغلق')">⚠️ الطوارئ</div>
+    <div class="nav-link" onclick="showSec('forms')">📝 الاستمارات</div>
+    <div class="nav-link" onclick="showSec('intel')">👁️ الاستخبارات</div>
+    <div class="nav-link" style="color:var(--red)" onclick="showSec('vault')">🔐 الخزنة السيادية</div>
 </nav>
 
 <div class="hero">
-    <h1 style="font-size: 3rem; margin: 0; color: var(--gold); text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);">MAZIN-113255</h1>
-    <p style="color: var(--cyan); letter-spacing: 4px;">SOVEREIGN CONTROL INTERFACE v4.0.1</p>
+    <h1 style="font-size: 3.5rem; margin: 0; letter-spacing: 10px;">MAZIN-113255</h1>
+    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: bold;">CENTRAL COMMAND & INTELLIGENCE UNIT</p>
 </div>
 
 <div class="ops-grid">
-    <button class="op-btn" onclick="showSec('constitution')">DATA_LINK_113</button>
-    <button class="op-btn">ENCRYPTION_MODE</button>
-    <button class="op-btn">PROTOCOL_X_RUN</button>
-    <button class="op-btn">TERMINATE_FALCON</button>
-    <button class="op-btn">KLJAT_SCANNER</button>
-    <button class="op-btn">ADMIN_VAULT</button>
-    <button class="op-btn">CORE_SYNC</button>
-    <button class="op-btn" onclick="showSec('services')">SERVICE_HUB</button>
+    <button class="op-btn" onclick="loadArticle('TERMINATE_FALCON')">TERMINATE_FALCON</button>
+    <button class="op-btn" onclick="loadArticle('KLJAT_SCANNER')">KLJAT_SCANNER</button>
+    <button class="op-btn" onclick="loadArticle('CORE_SYNC')">CORE_SYNC</button>
+    <button class="op-btn" onclick="showSec('intel')">MONITOR_TRAFFIC</button>
+    <button class="op-btn" onclick="showSec('vault')">ACCESS_VAULT</button>
+    <button class="op-btn" onclick="showSec('forms')">SUBMIT_RECORD</button>
 </div>
 
 <div id="home" class="container active-sec">
-    <h2 style="color: var(--cyan); border-bottom: 2px solid var(--cyan); padding-bottom: 10px;">🏛️ ديباجة السيادة العليا</h2>
-    <div style="white-space: pre-wrap; font-size: 1.1rem; text-align: justify;">
-بناءً على الصلاحيات المطلقة الممنوحة للقائد العام MAZIN-113255، نعلن تفعيل ميثاق "القبضة الحديدية". 
-هذا الموقع ليس مجرد صفحة، بل هو محرك إداري لضبط إيقاع المنظومة وتطهيرها من شوائب "الكلجات" وتمرّد "الصقور". 
+    <h2 style="color: var(--cyan); border-bottom: 2px solid var(--cyan); padding-bottom: 15px;">🏛️ ديباجة السيادة العليا (وثيقة القبضة الحديدية)</h2>
+    <div style="white-space: pre-wrap; line-height: 2.5; text-align: justify; font-size: 1.15rem;">
+بناءً على الصلاحيات المطلقة الممنوحة للقائد العام MAZIN-113255، وتحت راية "الرسمية المطلقة" التي لا تقبل التأويل، نعلن نحن قيادة الجهاز عن تأسيس هذا الدستور الرقمي ليكون السيف القاطع فوق أعناق الفوضى.
 
-أنت الآن في النطاق السيادي المحمي.. الولاء هنا هو العملة الوحيدة المعترف بها.
+"إن هيبة الكلمة هي جوهر السيادة، وإن انضباط الصف هو درع المنظومة."
+
+أولاً: غاية التأسيس
+أُسس هذا الكيان ليكون مصفاةً للنخبة، ومقصلةً لكل من تسول له نفسه العبث برسمية الحوار أو محاولة اختراق النسيج الأمني للجهاز. نحن هنا لنبني مجتمعاً رقمياً يخلو من "شوائب اللسان" و"تمرد الصقور".
+
+ثانياً: إعلان الحرب على "الكلجات"
+تعتبر المنظومة أن "الكلجة" ليست مجرد خطأ لغوي، بل هي ثغرة أمنية تعكس تشتت العضو وعدم أهليته لتمثيل الجهاز. لذا، فإن ملاحقة الكلجات وتطهير السجلات منها هي مهمة مقدسة لا تهاون فيها، والقانون الجنائي هنا لا يعرف الرحمة.
+
+ثالثاً: كسر "أجنحة الصقور"
+إن كل "صقر" يحاول التغريد خارج سرب الولاء الرسمي للقائد، أو يسعى لبث بذور التفرقة، سيجد نفسه أمام بروتوكول "النفي الرقمي الشامل". أجنحة التمرد تُقص هنا قبل أن ترفرف، والولاء لغير القائد هو العدم.
+
+رابعاً: ميثاق الالتزام
+إن دخولك إلى هذه القلعة واستخدامك لكود الرسمية 113KI هو إقرار منك بالخضوع التام للمواد من (101) وحتى (159). أنت هنا لست مخيراً، بل أنت جندي في منظومة يقودها العقل الاستراتيجي لـ MAZIN-113255.
+
+"ليعلم القاصي والداني، أن القانون في هذه القلعة يُكتب بحبر الولاء، ويُطبق بصرامة الجلاد."
     </div>
 </div>
 
 <div id="constitution" class="container">
-    <h2 style="text-align:center;">📂 الأرشيف الدستوري المحكم</h2>
-    <div class="mat-grid" id="mat-btns"></div>
-    <div id="mat-content" class="detail-card">
-        <p style="text-align:center; color: #555;">[ بانتظار فك تشفير المادة المحددة ]</p>
+    <h2 style="text-align:center; color: var(--cyan);">📂 الأرشيف الدستوري المحمي (نصوص كاملة)</h2>
+    <div class="mat-grid" id="mat-btns-container"></div>
+    <div id="mat-display" class="detail-card">
+        <p style="text-align:center; color:#444;">[ بانتظار فك تشفير المادة المطلوبة من الأرشيف ]</p>
     </div>
+</div>
+
+<div id="intel" class="container">
+    <h2 style="color:var(--cyan)">👁️ مركز الاستخبارات الرقمية</h2>
+    <div class="status-feed" id="live-logs">
+        > INITIALIZING INTEL FEED...<br>
+        > SCANNING IP PACKETS...<br>
+        > MONITORING SYSTEM ENTRY POINTS...<br>
+    </div>
+    <hr style="border:1px solid #222; margin:20px 0;">
+    <h3>📥 الطلبات المودعة في النظام</h3>
+    <div id="admin-request-list"></div>
+</div>
+
+<div id="forms" class="container">
+    <h2>📝 بوابة تقديم البيانات والاستحقاق</h2>
+    <div class="form-group">
+        <label>نوع العملية السيادية:</label>
+        <select id="f-type">
+            <option>طلب ترقية رتبة (نخبة)</option>
+            <option>إصدار هوية سيادية مشفرة</option>
+            <option>بلاغ عن منشق (صقر)</option>
+            <option>طلب فحص "كلجات" اللسان</option>
+        </select>
+    </div>
+    <input type="text" id="f-name" placeholder="الاسم الرمزي أو الرسمي">
+    <textarea id="f-desc" rows="5" placeholder="اكتب تفاصيل الطلب أو البلاغ هنا بكل دقة..."></textarea>
+    <button onclick="submitNewRequest()" style="background:var(--cyan); color:#000; border:none; padding:15px; width:100%; cursor:pointer; font-weight:bold;">إرسال للتدقيق والاستخبارات</button>
 </div>
 
 <div id="services" class="container">
     <h2 style="color: var(--cyan);">🛠️ مركز الخدمات التقنية</h2>
-    <ul style="list-style: none; padding: 0;">
-        <li style="padding: 15px; border-bottom: 1px solid #222;">🔹 طلب ترقية رتبة (نخبة)</li>
-        <li style="padding: 15px; border-bottom: 1px solid #222;">🔹 فحص "كلجات" اللسان الرقمي</li>
-        <li style="padding: 15px; border-bottom: 1px solid #222;">🔹 إصدار هوية سيادية مشفرة</li>
-        <li style="padding: 15px; border-bottom: 1px solid #222;">🔹 بلاغ عن منشق (صقر)</li>
-    </ul>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+        <div class="admin-card">
+            <h4>🔹 فحص الكلجات</h4>
+            <p>نظام فحص آلي يحلل آخر 100 رسالة للعضو لاكتشاف الثغرات اللغوية.</p>
+        </div>
+        <div class="admin-card">
+            <h4>🔹 الهوية الرقمية</h4>
+            <p>توليد بطاقة هوية مشفرة تحمل كود 113-KI الخاص بك.</p>
+        </div>
+    </div>
+</div>
+
+<div id="article-section" class="container">
+    <h2 id="art-title" style="color:var(--cyan)"></h2>
+    <div id="art-body" style="line-height:2; font-size:1.1rem; white-space: pre-wrap;"></div>
+    <button onclick="showSec('home')" style="margin-top:20px; border:1px solid var(--cyan); background:none; color:var(--cyan); padding:10px 20px; cursor:pointer;">إغلاق الملف</button>
+</div>
+
+<div id="vault" class="container">
+    <h2 style="color:var(--red)">🔐 الخزنة السيادية المشفرة</h2>
+    <p>تحذير: هذا النطاق مخصص للقائد الأعلى فقط. أي محاولة دخول خاطئة تسجل كـ "تسلل".</p>
+    <input type="password" id="vault-key" style="text-align:center; font-size:1.5rem;" placeholder="PASS-CODE">
+    <button onclick="unlockVault()" style="background:var(--red); color:#fff; border:none; padding:15px; width:100%; cursor:pointer;">فك التشفير</button>
+    <div id="vault-content" style="display:none; margin-top:30px;">
+        <p style="color:#0f0">✅ مرحباً يا قائد MAZIN. تم تأكيد الهوية.</p>
+        <button onclick="localStorage.clear(); location.reload();" style="background:none; border:1px solid red; color:red; padding:10px;">🔥 تدمير شامل لقاعدة بيانات الاستمارات</button>
+    </div>
 </div>
 
 <script>
-    const fullData = {
-        101: { t: "المرجعية الإدارية العليا", n: "تُقر هذه المادة بأن القائد MAZIN-113255 هو المرجع الأول والأخير لجميع القرارات التنظيمية والتشريعية. لا يُعتد بأي إجراء إداري ما لم يحمل موافقة صريحة من الإدارة العليا.", h: "إنهاء العضوية فوراً وبشكل قطعي." },
-        102: { t: "التنظيم الهيكلي", n: "يتم توزيع المسؤوليات بناءً على الكفاءة والولاء التنظيمي. يُمنع منعاً باتاً إنشاء أي مجموعات ضغط أو تكتلات تهدف إلى إضعاف الهيكل الإداري العام.", h: "خفض الصلاحيات ووضع العضو تحت الرقابة لمدة 30 يوماً." },
-        103: { t: "حماية الأصول المعلوماتية", n: "تُصنف جميع الأكواد، قواعد البيانات، والمراسلات الداخلية كأصول سرية للغاية. يُحظر تداولها خارج النطاق المسموح به.", h: "الحظر التقني والملاحقة بتهمة إفشاء الأسرار." },
-        104: { t: "حماية الخصوصية الإدارية", n: "يمنع التدخل في الشؤون الشخصية للأعضاء أو استخدام البيانات الإدارية لأغراض خارج نطاق العمل الرسمي للجهاز.", h: "إنذار نهائي ثم سحب الهوية الرقمية." },
-        105: { t: "بروتوكول التوثيق والانتساب", n: "الالتزام بالدقة الكاملة في ملء الاستمارة المكونة من 10 خانات. أي كشط أو تزوير يجعل العضوية باطلة.", h: "رفض الانتساب ومنع استرداد الرسوم المعنوية." },
-        106: { t: "الهوية الرسمية", n: "يُعد الكود الرقمي الممنوح لكل عضو هو الوسيلة الوحيدة لإثبات الشخصية. يُمنع إعارة الهوية أو السماح للغير باستخدامها.", h: "إلغاء الكود فوراً واعتبار العضو منتحلاً." },
-        107: { t: "الشفافية والبلاغات", n: "يُشجع الجهاز على التبليغ عن التجاوزات. التبليغ الكيدي يُعامل كجريمة إدارية مستقلة.", h: "نقل العقوبة للمُبلغ في حال ثبت كذب البلاغ." },
-        108: { t: "مكافحة التزوير الرقمي", n: "يُحظر التلاعب بتصميم البطاقات السيادية أو تعديل الرتب في واجهة النظام دون تصريح من القائد.", h: "الحظر النهائي ووضع الاسم في قائمة المحرومين." },
-        109: { t: "التقييم الدوري", n: "يخضع جميع الأعضاء لتقييم دوري لضمان الالتزام بمعايير الوقار والإنتاجية الإدارية.", h: "تجميد الحساب حتى اجتياز دورة تأهيلية." },
-        110: { t: "التنسيق المشترك", n: "يمنع التواصل مع جهات خارجية باسم الجهاز دون تفويض رسمي مكتوب وموقع من القائد.", h: "سحب الصفة الرسمية واعتبار التصرفات شخصية." },
-        111: { t: "السلوك العام والوقار", n: "الالتزام بالآداب العامة والخطاب الراقي. يُمنع الانجرار خلف الاستفزازات الجانبية.", h: "لفت نظر يليه تعليق العضوية لمدة أسبوع." },
-        112: { t: "مكافحة الفوضى", n: "يُمنع نشر أي محتوى يهدف إلى إثارة البلبلة أو التشكيك في نزاهة الإدارة السيادية.", h: "الإقصاء الإداري وحذف السجلات من الأرشيف." },
-        113: { t: "الطوارئ الإدارية", n: "في حالات الأزمات، يحق للقائد تعطيل بعض البنود مؤقتاً واتخاذ إجراءات حازمة لحماية استقرار الجهاز.", h: "مخالفة الأوامر تُعد تمرداً وعقوبتها النفي." },
-        158: { t: "الوقار اللغوي (الكلجات)", n: "الخطأ اللغوي يتطلب المراجعة. الإصرار على الأخطاء الجسيمة يُضعف هيبة المؤسسة.", h: "وضع الصمت حتى تصحيح الخطأ وتقديم اعتذار وقور." },
-        159: { t: "مكافحة الترصد (الصقرجة)", n: "يُجرم الترصد لعثرات الآخرين وتوثيقها بغرض الإساءة. هذا يتنافى مع ميثاق الشرف.", h: "الإعدام الرقمي التام ومحو الهوية." }
+    const constitutionData = {
+        101: { 
+            t: "مادة المرجعية الإدارية العليا", 
+            n: "تُقر هذه المادة بأن القائد MAZIN-113255 هو المرجع الأول والأخير لجميع القرارات التنظيمية والتشريعية. لا يُعتد بأي إجراء إداري ما لم يحمل موافقة صريحة من الإدارة العليا.", 
+            h: "أي محاولة لتجاوز المرجعية أو اتخاذ قرارات فردية تمس كيان الجهاز تؤدي إلى إنهاء العضوية فوراً وبشكل قطعي." 
+        },
+        102: { 
+            t: "مادة التنظيم الهيكلي", 
+            n: "يتم توزيع المسؤوليات بناءً على الكفاءة والولاء التنظيمي. يُمنع منعاً باتاً إنشاء أي مجموعات ضغط أو تكتلات تهدف إلى إضعاف الهيكل الإداري العام.", 
+            h: "خفض الصلاحيات الإدارية للمخالف ووضعه تحت الرقابة التقييمية لمدة 30 يوماً." 
+        },
+        103: { 
+            t: "مادة حماية الأصول المعلوماتية", 
+            n: "تُصنف جميع الأكواد، قواعد البيانات، والمراسلات الداخلية كأصول سرية للغاية. يُحظر تداولها خارج النطاق المسموح به من قبل القائد.", 
+            h: "الحظر التقني من جميع المنصات التابعة للجهاز والملاحقة الإدارية بتهمة إفشاء الأسرار." 
+        },
+        104: { 
+            t: "مادة حماية الخصوصية الإدارية", 
+            n: "يمنع التدخل في الشؤون الشخصية للأعضاء أو استخدام البيانات الإدارية لأغراض خارج نطاق العمل الرسمي للجهاز.", 
+            h: "توجيه إنذار نهائي، وفي حال التكرار يتم سحب الهوية الرقمية." 
+        },
+        105: { 
+            t: "بروتوكول التوثيق والانتساب", 
+            n: "الالتزام بالدقة الكاملة في ملء الاستمارة المكونة من 10 خانات. أي كشط أو تزوير في البيانات يجعل العضوية باطلة قانوناً.", 
+            h: "رفض طلب الانتساب أو إلغاء العضوية القائمة مع منع استرداد الرسوم المعنوية المرتبطة بها." 
+        },
+        106: { 
+            t: "مادة الهوية الرسمية", 
+            n: "يُعد الكود الرقمي الممنوح لكل عضو هو الوسيلة الوحيدة لإثبات الشخصية. يُمنع إعارة الهوية أو السماح للغير باستخدامها.", 
+            h: "إلغاء الكود فوراً واعتبار العضو 'منتحلاً للشخصية' في حال ثبت تفريطه في بياناته." 
+        },
+        107: { 
+            t: "مادة الشفافية والبلاغات", 
+            n: "يُشجع الجهاز على التبليغ عن التجاوزات عبر القنوات الرسمية. التبليغ الكيدي يُعامل كجريمة إدارية مستقلة.", 
+            h: "إذا ثبت كذب البلاغ، تقع العقوبة التي كانت مقررة للمُدعى عليه على المُبلغ نفسه." 
+        },
+        108: { 
+            t: "مادة مكافحة التزوير الرقمي", 
+            n: "يُحظر التلاعب بتصميم البطاقات السيادية أو تعديل الرتب الممنوحة في واجهة النظام دون تصريح من القائد شخصياً.", 
+            h: "الحظر النهائي من دخول موقع الإدارة السيادية ووضع الاسم في قائمة 'المحرومين من الموثوقية'." 
+        },
+        109: { 
+            t: "مادة التقييم الدوري", 
+            n: "يخضع جميع الأعضاء لتقييم دوري لضمان الالتزام بمعايير الوقار والإنتاجية الإدارية.", 
+            h: "العضو الذي يفشل في تحقيق معايير التقييم يُجمد حسابه حتى اجتياز دورة تأهيلية." 
+        },
+        110: { 
+            t: "مادة التنسيق المشترك", 
+            n: "يمنع التواصل مع جهات خارجية باسم الجهاز دون تفويض رسمي مكتوب وموقع من القائد.", 
+            h: "سحب الصفة الرسمية عن العضو واعتبار تصرفات شخصية ولا تمثل الجهاز." 
+        },
+        111: { 
+            t: "مادة السلوك العام والوقار", 
+            n: "الالتزام بالآداب العامة والخطاب الراقي في جميع النقاشات. يُمنع الانجرار خلف الاستفزازات الجانبية.", 
+            h: "لفت نظر رسمي، يليه تعليق العضوية لمدة أسبوع في حال التكرار." 
+        },
+        112: { 
+            t: "مادة مكافحة الفوضى", 
+            n: "يُمنع نشر أي محتوى يهدف إلى إثارة البلبلة أو التشكيك في نزاهة الإدارة السيادية.", 
+            h: "الإقصاء الإداري المباشر وحذف جميع سجلات العضو من الأرشيف." 
+        },
+        113: { 
+            t: "مادة الطوارئ الإدارية", 
+            n: "في حالات الأزمات، يحق للقائد تعطيل بعض البنود مؤقتاً واتخاذ إجراءات حازمة لحماية استقرار الجهاز.", 
+            h: "مخالفة أوامر الطوارئ تُعد 'تمرداً إدارياً' وعقوبتها النفي الفوري." 
+        },
+        158: { 
+            t: "مادة الوقار اللغوي (محاسبة الكلجات)", 
+            n: "الخطأ اللغوي العفوي يتطلب المراجعة الذاتية. الإصرار على ارتكاب الأخطاء الجسيمة يُضعف هيبة المؤسسة.", 
+            h: "التقييد الكتابي المؤقت (وضع الصمت) حتى يتم تصحيح الأخطاء وتقديم اعتذار إداري وقور." 
+        },
+        159: { 
+            t: "مادة مكافحة الترصد الكيدي (الصقرجة)", 
+            n: "يُجرم الترصد لعثرات الآخرين وتوثيقها بغرض الإساءة. هذا السلوك يتنافى مع ميثاق الشرف الإداري.", 
+            h: "الإعدام الرقمي التام؛ وهو محو الهوية والبيانات ومنع العودة تحت أي مسمى آخر." 
+        }
+    };
+
+    const articleData = {
+        'TERMINATE_FALCON': {
+            t: "ملف: بروتوكول تدمير الصقور المنشقة",
+            b: "يُعد هذا البروتوكول الأداة الأعنف في ترسانة MAZIN-113255. \n\nعند رصد أي 'صقر' يحاول زعزعة الصف، يتم تفعيل التتبع الرقمي لهويته وسحب كافة صلاحياته التشريفية. \n\nالهدف: تطهير المنظومة من العناصر التي تظن أنها فوق القانون."
+        },
+        'KLJAT_SCANNER': {
+            t: "ملف: نظام رصد الثغرات اللغوية (Scanner)",
+            b: "هذا النظام ليس مجرد مصحح إملائي، بل هو مرصد لهيبة العضو. \n\nالكلجة هي انعكاس لعدم التركيز والوقار. يقوم الماسح برصد 'السقطات' اللسانية وتوثيقها في الأرشيف الجنائي للعضو لإصدار عقوبة وضع الصمت."
+        },
+        'CORE_SYNC': {
+            t: "ملف: تزامن النواة الإدارية (Core Sync)",
+            b: "يضمن هذا النظام أن قرارات القائد MAZIN تصل إلى كافة أطراف المنظومة في أجزاء من الثانية. \n\nتتم المزامنة بين الأرشيف الدستوري وغرفة الاستخبارات لضمان تطبيق العقوبات فور صدورها."
+        }
     };
 
     function init() {
-        const grid = document.getElementById('mat-btns');
-        Object.keys(fullData).forEach(id => {
+        const container = document.getElementById('mat-btns-container');
+        Object.keys(constitutionData).forEach(id => {
             let b = document.createElement('div');
             b.className = 'm-num'; b.innerText = id;
             b.onclick = () => {
                 document.querySelectorAll('.m-num').forEach(x => x.classList.remove('active'));
                 b.classList.add('active');
-                renderMat(id);
+                displayMat(id);
             };
-            grid.appendChild(b);
+            container.appendChild(b);
         });
+        updateLogs();
     }
 
-    function renderMat(id) {
-        const m = fullData[id];
-        document.getElementById('mat-content').innerHTML = `
-            <h3 style="color:var(--cyan); margin-top:0;">🛡️ المادة (${id}): ${m.t}</h3>
-            <p><b>المضمون:</b><br>${m.n}</p>
+    function displayMat(id) {
+        const m = constitutionData[id];
+        document.getElementById('mat-display').innerHTML = `
+            <h3 style="color:var(--cyan); border-bottom:1px solid #333; padding-bottom:10px;">🛡️ المادة (${id}): ${m.t}</h3>
+            <p><b>المضمون السيادي:</b><br>${m.n}</p>
             <p style="color:var(--red); border:1px solid var(--red); padding:10px; background:rgba(255,0,0,0.05);">
-                <b>القرار الجزائي:</b> ${m.h}
+                <b>الإجراء الجزائي:</b><br>${m.h}
             </p>
-            <p style="text-align:left; font-size:0.8rem; color:var(--gold);">AUTHENTICATED BY MAZIN-113255</p>
+            <p style="text-align:left; color:var(--gold); font-style:italic;">بأمر القائد: MAZIN-113255</p>
         `;
+    }
+
+    function loadArticle(key) {
+        const a = articleData[key];
+        document.getElementById('art-title').innerText = a.t;
+        document.getElementById('art-body').innerText = a.b;
+        showSec('article-section');
     }
 
     function showSec(id) {
         document.querySelectorAll('.container').forEach(c => c.classList.remove('active-sec'));
         document.getElementById(id).classList.add('active-sec');
-        window.scrollTo({top: 400, behavior: 'smooth'});
+        window.scrollTo(0, 400);
     }
 
-    init();
+    function submitNewRequest() {
+        const req = {
+            id: Date.now(),
+            type: document.getElementById('f-type').value,
+            name: document.getElementById('f-name').value,
+            desc: document.getElementById('f-desc').value,
+            time: new Date().toLocaleString('ar-EG')
+        };
+        if(!req.name || !req.desc) return alert("البيانات ناقصة!");
+        let db = JSON.parse(localStorage.getItem('intel_requests') || '[]');
+        db.push(req);
+        localStorage.setItem('intel_requests', JSON.stringify(db));
+        alert("تم إرسال الملف إلى الاستخبارات. جاري الفحص...");
+        renderIntelRequests();
+    }
+
+    function renderIntelRequests() {
+        let db = JSON.parse(localStorage.getItem('intel_requests') || '[]');
+        const list = document.getElementById('admin-request-list');
+        list.innerHTML = db.length ? '' : '<p>لا توجد تحركات مرصودة.</p>';
+        db.forEach(r => {
+            list.innerHTML += `
+                <div class="admin-card">
+                    <span class="badge">${r.type}</span> <b>${r.name}</b> <small style="float:left">${r.time}</small>
+                    <p>${r.desc}</p>
+                    <button onclick="handleReq(${r.id}, 'قُبِل')" style="color:var(--cyan); background:none; border:1px solid var(--cyan); cursor:pointer;">موافقة سيادية</button>
+                    <button onclick="handleReq(${r.id}, 'رُفِض')" style="color:var(--red); background:none; border:1px solid var(--red); cursor:pointer; margin-right:10px;">نفي الطلب</button>
+                </div>
+            `;
+        });
+    }
+
+    function handleReq(id, action) {
+        let db = JSON.parse(localStorage.getItem('intel_requests') || '[]');
+        db = db.filter(x => x.id !== id);
+        localStorage.setItem('intel_requests', JSON.stringify(db));
+        alert("تم الإجراء: " + action);
+        renderIntelRequests();
+    }
+
+    function unlockVault() {
+        if(document.getElementById('vault-key').value === '113255KI') {
+            document.getElementById('vault-content').style.display = 'block';
+        } else {
+            alert("⚠️ تنبيه: محاولة دخول غير مصرح بها لمركز القيادة!");
+        }
+    }
+
+    function updateLogs() {
+        const logs = document.getElementById('live-logs');
+        const msgs = [
+            "> Scanning Kljat signatures...",
+            "> Monitoring Falcon wing-beats...",
+            "> IP 109.12.XX encrypted...",
+            "> Sovereign system steady.",
+            "> New intelligence report generated."
+        ];
+        setInterval(() => {
+            logs.innerHTML += `<br>> ${msgs[Math.floor(Math.random()*msgs.length)]}`;
+            logs.scrollTop = logs.scrollHeight;
+        }, 3000);
+    }
+
+    window.onload = () => {
+        init();
+        renderIntelRequests();
+    };
 </script>
 </body>
 </html>
