@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منظومة الإدارة السيادية | MAZIN-113255 🕸</title>
+    <title>منظومة مكافحة الصقور والكلجات | MAZIN-113255 🦅</title>
     <style>
         :root {
             --gold: #d4af37;
@@ -12,6 +12,7 @@
             --glass: rgba(10, 10, 10, 0.95);
             --green: #00ff41;
             --glow: 0 0 15px rgba(212, 175, 55, 0.5);
+            --matrix-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
         }
 
         body {
@@ -23,9 +24,21 @@
             overflow-x: hidden;
         }
 
-        .overlay { background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.98) 100%); min-height: 100vh; padding: 20px; }
+        .overlay { 
+            background: radial-gradient(circle, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.99) 100%); 
+            min-height: 100vh; 
+            padding: 20px; 
+        }
 
-        /* القائمة الرئيسية العظيمة */
+        /* تحسين الهيدر */
+        header {
+            text-align: center;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* القائمة الرئيسية المحدثة */
         .main-nav { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
@@ -36,147 +49,140 @@
 
         .nav-btn {
             padding: 25px;
-            background: rgba(20, 20, 20, 0.8);
+            background: rgba(15, 15, 15, 0.9);
             border: 1px solid var(--gold);
             color: var(--gold);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
             text-transform: uppercase;
             letter-spacing: 2px;
             box-shadow: var(--glow);
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
         }
 
-        .nav-btn::before {
-            content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent);
-            transition: 0.5s;
+        .nav-btn:hover { 
+            transform: translateY(-5px); 
+            background: var(--gold); 
+            color: #000; 
+            box-shadow: 0 0 30px var(--gold);
         }
-
-        .nav-btn:hover::before { left: 100%; }
-        .nav-btn:hover { transform: scale(1.05); background: var(--gold); color: #000; box-shadow: 0 0 30px var(--gold); }
 
         /* الأقسام */
         .section {
             display: none; max-width: 1100px; margin: 30px auto;
             background: var(--glass); padding: 50px; border: 1px solid #222;
-            border-top: 5px solid var(--gold); position: relative;
+            border-top: 3px solid var(--gold); position: relative;
             box-shadow: 0 0 50px rgba(0,0,0,1);
+            animation: slideIn 0.5s ease-out;
         }
 
-        /* مركز العمليات المعقد */
-        .ops-grid {
-            display: grid; grid-template-columns: 1fr 300px; gap: 20px;
-        }
-
-        .admin-card {
-            border-left: 4px solid var(--red); background: #0a0a0a;
-            padding: 20px; margin-bottom: 15px; border-bottom: 1px solid #222;
-        }
+        @keyframes slideIn { from { opacity: 0; scale: 0.95; } to { opacity: 1; scale: 1; } }
 
         .material-content {
             background: #000; border: 1px double var(--gold); padding: 30px; line-height: 1.8;
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.1);
         }
 
         .materials-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        
         .mat-btn { 
-            background: transparent; border: 1px solid #444; color: var(--gold); 
-            width: 60px; height: 60px; cursor: pointer; font-weight: bold;
+            background: #0a0a0a; border: 1px solid #333; color: var(--gold); 
+            width: 65px; height: 65px; cursor: pointer; font-weight: bold;
+            transition: 0.3s;
         }
-        .mat-btn:hover { border-color: var(--gold); box-shadow: 0 0 10px var(--gold); }
+
+        .mat-btn:hover { border-color: var(--gold); background: var(--gold); color: #000; box-shadow: 0 0 15px var(--gold); }
 
         input, select { 
-            width: 100%; padding: 15px; margin: 10px 0; background: #080808; 
+            width: 100%; padding: 15px; margin: 10px 0; background: #050505; 
             border: 1px solid #333; color: var(--green); font-family: monospace;
+            outline: none;
         }
 
-        .blink-red { color: var(--red); animation: blink 0.5s infinite; }
+        input:focus { border-color: var(--green); box-shadow: 0 0 10px var(--green); }
+
+        .blink-red { color: var(--red); animation: blink 0.5s infinite; font-weight: bold; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        h1, h2 { text-shadow: 0 0 10px var(--gold); text-align: center; }
+        /* مركز العمليات */
+        .ops-grid { display: grid; grid-template-columns: 1fr 300px; gap: 20px; }
+        .admin-card { border-right: 4px solid var(--red); background: #0c0c0c; padding: 20px; margin-bottom: 15px; }
+
     </style>
 </head>
 <body>
 
 <div class="overlay">
     <header style="margin-top: 40px;">
-        <h1 style="font-size: 3rem; letter-spacing: 15px; margin: 0;">الإدارة السيادية</h1>
-        <div style="width: 300px; height: 2px; background: var(--gold); margin: 10px auto;"></div>
-        <p style="text-align:center; letter-spacing: 5px;">MAZIN-113255 | PROTOCOL 113-KI</p>
+        <h1 style="font-size: 2.8rem; letter-spacing: 10px; margin: 0; color: var(--gold);">منظومة مكافحة الصقور والكلجات</h1>
+        <div style="width: 400px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 15px auto;"></div>
+        <p style="text-align:center; letter-spacing: 5px; color: #fff;">MAZIN-113255 | ANTI-FALCON PROTOCOL 113-KI</p>
     </header>
 
     <nav class="main-nav">
-        <button class="nav-btn" onclick="showSec('intro')">📜 ميثاق السيادة</button>
-        <button class="nav-btn" onclick="showSec('index')">📂 الفهرس الدستوري</button>
-        <button class="nav-btn" onclick="showSec('membership')">📝 استمارة العضوية</button>
-        <button class="nav-btn" onclick="showSec('submissions-auth')">📥 تتبع الاستمارة</button>
-        <button class="nav-btn" style="grid-column: span 2; border-color: var(--red);" onclick="showSec('admin-auth')">🛡 مركز القيادة العليا (محظور)</button>
+        <button class="nav-btn" onclick="showSec('intro')">📜 ديباجة المنظومة</button>
+        <button class="nav-btn" onclick="showSec('index')">📂 الأرشيف الدستوري</button>
+        <button class="nav-btn" onclick="showSec('membership')">📝 طلب استحقاق</button>
+        <button class="nav-btn" onclick="showSec('submissions-auth')">📥 رصد الطلبات</button>
+        <button class="nav-btn" style="grid-column: span 2; border-color: var(--red); color: var(--red);" onclick="showSec('admin-auth')">🛡 غرف القيادة العليا (X-ZONE)</button>
     </nav>
 
     <div id="intro" class="section">
-        <h2 style="color:var(--gold)">ميثاق السيادة: القوة بالمعرفة.. والأمان بالتمكين</h2>
-        <div style="white-space: pre-wrap; line-height: 2.2; font-size: 1.1rem; text-align: justify; padding: 20px; border: 1px solid #222;">
-في البدءِ كانت الكلمة، وفي المنتهى تظلُّ السيادةُ هي الغايةُ والمبتدأ.
-نحنُ هنا لا نبني مجرد منصة رقمية، بل نشيّدُ صرحاً للفكر المستقل والقرار الحصين.
-إن السيادة في عصرنا الحالي لم تعد حدوداً جغرافية فحسب، بل هي فضاءٌ رقميٌّ محميّ.
-هي وعيٌ يتجاوزُ التبعية، وقوةٌ ترفضُ الارتهان لغيرِ إرادتها.
-من هنا، من قلبِ المتغيرات المتسارعة، نعلنُ انطلاق رؤيتنا لتمكينِ الإنسانِ والكيان.
-نجمعُ في هذه المنصة بين صرامةِ الأنظمةِ الأمنية وعمقِ التحليلِ الاستراتيجي.
-نؤمنُ أنَّ المعلومةَ سلاح، وأنَّ حمايتها هي أولى معاركِ البقاء.
-لذا، سخرنا أدواتنا التقنية لتكون درعاً وسيفاً في آنٍ واحد.
-درعاً يصونُ الخصوصية، وسيفاً يقطعُ دابر التضليل والتبعية الفكرية.
-إنَّ سيادة المعلومات تبدأ من حيثُ تنتهي قدرة الآخرين على اختراقِ وعيك.
-ونحنُ هنا لنرسم الخط الفاصل بين التلقي العشوائي والتحليل السيادي.
-كل زاوية في هذا الموقع صُممت لتعكس هيبة الحقيقة وصلابة الحماية.
-فلسفتنا تقوم على أنَّ "الأمن" ليس مجرد برمجيات، بل هو ثقافةٌ ومنهجُ حياة.
-و"الفكر" ليس مجرد نصوص، بل هو طاقةٌ محركةٌ للتغيير والتطوير.
-نحنُ جسرٌ يربطُ بين التراث المعرفي العريق ومستقبلِ الذكاء الاصطناعي.
-لا نكتفي برصدِ الواقع، بل نعيدُ صياغتهُ بما يخدمُ تطلعاتنا السيادية.
-هنا تلتقي العقول التي تأبى التقليد، والأنظمة التي ترفضُ الاختراق.
-إننا نمنحكم السيطرة الكاملة؛ السيطرة على المعلومة، والسيطرة على المسار.
-في كل مقالٍ ننشره، هناك رسالةُ تمكين.. وفي كل بروتوكول أمني نطبقه، هناك وعدٌ بالولاء.
-نحنُ المرجع الذي يستندُ إليه الطامحون لسيادةِ ذواتهم ومؤسساتهم.
-نؤمن بأن العصر الذهبي هو ذلك الذي تتحكم فيه الأمم في "بياناتها" و"أفكارها".
-لذا، كانت هذه المنصة لتكون الحصن الرقمي الأول لكل صاحبِ قرار.
-نرحبُ بكم في فضاءٍ يحترمُ العقل، ويقدسُ الخصوصية، ويعززُ النفوذ.
-لسنا مجرد موقعٍ إلكتروني، بل نحنُ شريككم في رحلة الاستقلال الرقمي.
-السيادةُ هي أن تملك خيارك، والتمكين هو أن نمنحك القدرة على تنفيذه.
-انطلقوا معنا في استكشافِ آفاق القوة، حيثُ لا سقف للطموح ولا حدود للإرادة.
-هنا نصنعُ الفرق، وهنا نحمي الأثر، وهنا تبدأ رحلة السيادة المطلقة.
+        <h2 style="color:var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 15px;">🏛️ ديباجة الدستور السيادي الأعلى</h2>
+        <div style="white-space: pre-wrap; line-height: 2.2; font-size: 1.1rem; text-align: justify; padding: 25px; border: 1px solid #222; background: rgba(0,0,0,0.5);">
+(وثيقة التأسيس والقبضة الحديدية)
+بناءً على الصلاحيات المطلقة الممنوحة للقائد العام MAZIN-113255، وتحت راية "الرسمية المطلقة" التي لا تقبل التأويل، نعلن نحن قيادة الجهاز عن تأسيس هذا الدستور الرقمي ليكون السيف القاطع فوق أعناق الفوضى.
+
+"إن هيبة الكلمة هي جوهر السيادة، وإن انضباط الصف هو درع المنظومة."
+
+أولاً: غاية التأسيس
+أُسس هذا الكيان ليكون مصفاةً للنخبة، ومقصلةً لكل من تسول له نفسه العبث برسمية الحوار أو محاولة اختراق النسيج الأمني للجهاز. نحن هنا لنبني مجتمعاً رقمياً يخلو من "شوائب اللسان" و"تمرد الصقور".
+
+ثانياً: إعلان الحرب على "الكلجات"
+تعتبر المنظومة أن "الكلجة" ليست مجرد خطأ لغوي، بل هي ثغرة أمنية تعكس تشتت العضو وعدم أهليته لتمثيل الجهاز. لذا، فإن ملاحقة الكلجات وتطهير السجلات منها هي مهمة مقدسة لا تهاون فيها، والقانون الجنائي هنا لا يعرف الرحمة.
+
+ثالثاً: كسر "أجنحة الصقور"
+إن كل "صقر" يحاول التغريد خارج سرب الولاء للقائد، أو يسعى لبث بذور التفرقة، سيجد نفسه أمام بروتوكول "النفي الرقمي الشامل". أجنحة التمرد تُقص هنا قبل أن ترفرف، والولاء لغير القائد هو العدم.
+
+رابعاً: ميثاق الالتزام
+إن دخولك إلى هذه القلعة واستخدامك لكود الرسمية 113KI هو إقرار منك بالخضوع التام للمواد من (101) وحتى (159). أنت هنا لست مخيراً، بل أنت جندي في منظومة يقودها العقل الاستراتيجي لـ MAZIN-113255.
+
+"ليعلم القاصي والداني، أن القانون في هذه القلعة يُكتب بحبر الولاء، ويُطبق بصرامة الجلاد."
         </div>
-        <p style="text-align:center; color:#555; margin-top:20px;">سوف يتم عرضها بعد موافقة القائد الأعلى MAZIN-113255</p>
+        <p style="text-align:center; color:var(--red); margin-top:20px; font-weight: bold;">تُطبق هذه الوثيقة بأمر القائد الأعلى MAZIN-113255</p>
     </div>
 
     <div id="index" class="section">
-        <h2>📂 الأرشيف الدستوري الممنوع</h2>
+        <h2>📂 الأرشيف الدستوري المحمي</h2>
         <div class="materials-grid" id="mat-grid"></div>
         <div id="material-display" class="material-content" style="display:none; margin-top:30px;"></div>
     </div>
 
     <div id="admin-auth" class="section">
-        <h3 class="blink-red">! WARNING: SOVEREIGN ACCESS ONLY !</h3>
-        <p style="text-align:center;">يجب إدخال مفتاح التشفير الطبقي للوصول إلى غرف العمليات</p>
-        <input type="password" id="admin-code" style="text-align:center; font-size:1.5rem;" placeholder="X-X-X-X-X">
+        <h3 class="blink-red">! WARNING: COMMANDER ACCESS ONLY !</h3>
+        <p style="text-align:center;">إدخال شفرة العبور لفك تشفير غرف العمليات</p>
+        <input type="password" id="admin-code" style="text-align:center; font-size:1.5rem;" placeholder="PASSWORD">
         <button class="nav-btn" style="width:100%" onclick="loginAdmin()">تفعيل البروتوكول</button>
     </div>
 
     <div id="admin-panel" class="section">
         <div class="ops-grid">
             <div>
-                <h2 style="text-align:right; color:var(--red);">🛡 سجل الهويات المنتظرة</h2>
+                <h2 style="text-align:right; color:var(--red);">🛡 سجل الهويات الموقوفة</h2>
                 <div id="admin-submissions-list"></div>
             </div>
             <div style="border-right: 1px solid #333; padding: 20px;">
-                <h4 style="color:var(--gold)">نظام الرصد</h4>
+                <h4 style="color:var(--gold)">حالة الرادار</h4>
                 <div style="font-size:0.7rem; color:var(--green)">
-                    > STATUS: ACTIVE<br>
-                    > ENCRYPTION: AES-256<br>
-                    > TRACKING: ENABLED<br>
+                    > STATUS: MONITORING<br>
+                    > TARGETS: FALCONS & KLJAT<br>
+                    > FIREWALL: ACTIVE<br>
                     <img src="https://i.ibb.co/LkhmJxv/radar.gif" style="width:100%; margin-top:20px;">
-                    <p>إجمالي الطلبات: <span id="stat-count">0</span></p>
+                    <p>إجمالي الأهداف: <span id="stat-count">0</span></p>
                 </div>
             </div>
         </div>
@@ -184,30 +190,30 @@
 
     <div id="membership" class="section">
         <h2>📝 بروتوكول استحقاق العضوية</h2>
-        <p style="text-align:center; font-size:0.8rem;">تأكد من دقة البيانات؛ الخطأ يعني الحظر الرقمي الدائم</p>
+        <p style="text-align:center; font-size:0.8rem; color: var(--red);">تحذير: البيانات تخضع للفحص الاستخباراتي</p>
         <form id="member-form">
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                <input type="text" id="m-name" placeholder="الاسم الشخصي">
+                <input type="text" id="m-name" placeholder="الاسم">
                 <input type="text" id="m-last" placeholder="اللقب">
             </div>
             <input type="text" id="m-family" placeholder="اسم العائلة الكامل">
             <select id="m-gender">
                 <option value="">تحديد الجنس</option>
-                <option value="ذكر">ذكر (MALE)</option>
-                <option value="أنثى">أنثى (FEMALE)</option>
+                <option value="ذكر">ذكر</option>
+                <option value="أنثى">أنثى</option>
             </select>
-            <input type="date" id="m-birth" onchange="checkAge()">
-            <input type="tel" id="m-phone" placeholder="رقم الاتصال الدولي">
+            <input type="date" id="m-birth">
+            <input type="tel" id="m-phone" placeholder="الرقم الدولي">
             <input type="email" id="m-email" placeholder="البريد المشفر">
-            <input type="text" id="m-residence" placeholder="دولة الإقامة السيادية">
-            <button type="button" class="nav-btn" style="width:100%" onclick="submitForm()">تصدير البيانات للقيادة</button>
+            <input type="text" id="m-residence" placeholder="دولة الإقامة">
+            <button type="button" class="nav-btn" style="width:100%" onclick="submitForm()">إرسال التقرير للقيادة</button>
         </form>
     </div>
 
     <div id="submissions-auth" class="section">
-        <h2>📥 مراجعة الملف الشخصي</h2>
-        <input type="text" id="reg-code" placeholder="أدخل كود المرور الخاص بك">
-        <button class="nav-btn" style="width:100%" onclick="viewMySubmission()">استرجاع البيانات</button>
+        <h2>📥 تتبع ملف الكيان</h2>
+        <input type="text" id="reg-code" placeholder="أدخل كود المرور">
+        <button class="nav-btn" style="width:100%" onclick="viewMySubmission()">استرجاع الحالة</button>
         <div id="personal-submission-view" class="material-content" style="display:none; margin-top:20px;"></div>
     </div>
 </div>
@@ -219,11 +225,9 @@
     const materials = {
         101: { t: "حجر الزاوية والسيادة المطلقة", n: "تُقر هذه المادة بأن القائد MAZIN-113255 هو السلطة العليا والوحيدة التي لا تُمس، وكلامه هو القانون السائد.", d: "يُمنع منعاً باتاً التشكيك في أي قرار يصدر من غرف القيادة. الولاء هنا ليس خياراً بل هو شرط البقاء داخل المنظومة.", h: "أي محاولة لتحريف كلام القائد أو تفسيره بغير محمله الرسمي تُصنف كجريمة زعزعة أمن القلعة.", p: "تشرح هذه المادة في تفاصيلها العميقة تاريخ التأسيس، وكيف أن القائد هو حامي الحمى من هجمات الصقور والكلجات، وتفصل آليات تنفيذ الأوامر." },
         102: { t: "ميثاق اللغة العظمى وملاحقة الكلجات", n: "كل حرف يخرج في المحادثات الرسمية يجب أن يكون منقحاً؛ الكلجة هي العدو الأول للرسمية.", d: "يُعرف الكلجي بأنه كل عضو يفشل في ضبط إملاءاته أو مخارج حروفه الرقمية بما يليق بهيبة الجهاز.", h: "يتم رصد الكلجة وتصويرها (ScreenShot) وإرفاقها في ملف العضو الجنائي كدليل إدانة.", p: "تفصل المادة أنواع الكلجات (كيبورد، تعبيرية، استيعاب). وتضع جدولاً زمنياً للعقوبات يبدأ من الحرمان المؤقت وصولاً للإقصاء." },
-        103: { t: "مكافحة تجمعات الصقور السرية", n: "يُمنع إنشاء أي مجموعات جانبية أو تحالفات خلف كواليس الجهاز دون إذن كتابي مشفر من القائد.", d: "أي صقر يحاول جمع أعضاء حوله لتشكيل قوة موازية يُعتبر منشقاً عن الصف.", h: "يتم تفعيل الاستخبارات الرقمية لمراقبة التحركات المشبوهة والتحقق من الولاءات الفردية.", p: "تشرح المادة كيفية تفكيك هذه التجمعات، وطرق استجواب المحرضين، وآليات إعادة تأهيل الأعضاء المغرر بهم." },
-        // ... (سيتم ملء البقية برمجياً بنفس النمط لتوفير المساحة)
+        103: { t: "مكافحة تجمعات الصقور السرية", n: "يُمنع إنشاء أي مجموعات جانبية أو تحالفات خلف كواليس الجهاز دون إذن كتابي مشفر من القائد.", d: "أي صقر يحاول جمع أعضاء حوله لتشكيل قوة موازية يُعتبر منشقاً عن الصف.", h: "يتم تفعيل الاستخبارات الرقمية لمراقبة التحركات المشبوهة والتحقق من الولاءات الفردية.", p: "تشرح المادة كيفية تفكيك هذه التجمعات، وطرق استجواب المحرضين، وآليات إعادة تأهيل الأعضاء المغرر بهم." }
     };
 
-    // إضافة بقية المواد من نصك الأصلي
     const additionalMaterials = [104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 158, 159];
     
     function generateMatGrid() {
@@ -242,14 +246,14 @@
 
     function showMaterial(id) {
         const d = document.getElementById('material-display');
-        const m = materials[id] || { t: "مادة مشفرة", n: "المحتوى قيد المراجعة السيادية.", d: "لا يُسمح بالعرض حالياً.", h: "بروتوكول أمني نشط.", p: "سيتم العرض لاحقاً." };
+        const m = materials[id] || { t: "مادة مشفرة", n: "المحتوى قيد المراجعة.", d: "لا يُسمح بالعرض حالياً.", h: "بروتوكول أمني نشط.", p: "سيتم العرض لاحقاً." };
         d.innerHTML = `
-            <h3 style="color:var(--gold); border-bottom:1px solid var(--gold); padding-bottom:10px;">⚖️ المادة (${id}): ${m.t}</h3>
-            <p><b>النص السيادي:</b> ${m.n}</p>
-            <p><b>التفصيل:</b> ${m.d}</p>
-            <p><b>الحيثيات الجنائية:</b> ${m.h}</p>
-            <p style="border: 1px dashed var(--gold); padding: 10px; font-size: 0.9rem;">
-                <b>بروتوكول الـ ${id} أسطر:</b> ${m.p}
+            <h3 style="color:var(--gold); border-bottom:1px solid var(--gold); padding-bottom:10px;">🛡️ المادة (${id}): ${m.t}</h3>
+            <p><b>نص المنظومة:</b> ${m.n}</p>
+            <p><b>التفصيل الاستراتيجي:</b> ${m.d}</p>
+            <p><b>الحيثيات:</b> ${m.h}</p>
+            <p style="border: 1px dashed var(--gold); padding: 10px; font-size: 0.9rem; background: #050505;">
+                <b>البروتوكول التنفيذي:</b> ${m.p}
             </p>
         `;
         d.style.display = 'block';
@@ -271,14 +275,14 @@
         };
         db.push(entry);
         localStorage.setItem('vault_v4', JSON.stringify(db));
-        alert("تم التشفير والإرسال. كودك السري: " + code);
+        alert("تم الإرسال لغرفة العمليات. كود المراجعة: " + code);
     }
 
     function loginAdmin() {
         if(ADMIN_CODES.includes(document.getElementById('admin-code').value)) {
             showSec('admin-panel');
             renderAdmin();
-        } else { alert("ACCESS DENIED: IP TRACKED"); }
+        } else { alert("ACCESS DENIED: UNAUTHORIZED ATTEMPT"); }
     }
 
     function renderAdmin() {
@@ -286,10 +290,10 @@
         document.getElementById('stat-count').innerText = db.length;
         list.innerHTML = db.map(s => `
             <div class="admin-card">
-                <b>${s.name}</b> (${s.gender}) - <span style="color:var(--gold)">${s.code}</span>
+                <b>${s.name}</b> - <span style="color:var(--gold)">${s.code}</span>
                 <div style="margin-top:10px;">
-                    <button onclick="decide(${s.id}, 'approved')" style="background:var(--green); border:none; cursor:pointer;">قبول</button>
-                    <button onclick="decide(${s.id}, 'rejected')" style="background:var(--red); border:none; cursor:pointer; margin-right:10px;">نفي</button>
+                    <button onclick="decide(${s.id}, 'approved')" style="background:var(--green); border:none; padding: 5px 15px; cursor:pointer;">قبول</button>
+                    <button onclick="decide(${s.id}, 'rejected')" style="background:var(--red); border:none; padding: 5px 15px; cursor:pointer; margin-right:10px;">نفي</button>
                 </div>
             </div>
         `).join('');
@@ -299,8 +303,8 @@
         db = db.map(s => {
             if(s.id === id) {
                 s.status = status;
-                s.rank = status === 'approved' ? "نخبة سيادية" : "منفي";
-                s.serial = "SID-" + Math.floor(1000 + Math.random() * 8999);
+                s.rank = status === 'approved' ? "نخبة مكافحة" : "منفي";
+                s.serial = "KI-" + Math.floor(1000 + Math.random() * 8999);
             }
             return s;
         });
@@ -314,13 +318,13 @@
         const v = document.getElementById('personal-submission-view');
         if(s) {
             v.innerHTML = `
-                <h3 style="color:var(--gold)">تقرير الكيان الرقمي</h3>
+                <h3 style="color:var(--gold)">تقرير الحالة الأمنية</h3>
                 <p>الاسم: ${s.name}</p>
                 <p>الحالة: <span class="blink-red">${s.status.toUpperCase()}</span></p>
                 ${s.status === 'approved' ? `<p>الرتبة: ${s.rank}</p><p>الهوية: ${s.serial}</p>` : ''}
             `;
             v.style.display = 'block';
-        } else { alert("الكود غير موجود في السجلات"); }
+        } else { alert("الكود غير مسجل في أرشيف المنظومة"); }
     }
 </script>
 </body>
