@@ -3,319 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منظومة مكافحة الصقور والكلجات | MAZIN-113255 🦅</title>
+    <title>مركز القيادة السيادية | MAZIN-113255</title>
     <style>
         :root {
-            --gold: #d4af37;
-            --red: #ff0000;
-            --dark: #050505;
-            --glass: rgba(10, 10, 10, 0.95);
-            --green: #00ff41;
-            --glow: 0 0 15px rgba(212, 175, 55, 0.5);
+            --gold: #d4af37; --red: #ff3e3e; --cyan: #00f3ff;
+            --bg: #02050a; --glass: rgba(0, 20, 40, 0.9);
         }
-
         body {
-            background: #000 url('https://i.ibb.co/3S7zD7Z/tech-bg.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: var(--gold);
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            overflow-x: hidden;
+            background: var(--bg); color: var(--gold);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; overflow-x: hidden;
+            background-image: radial-gradient(circle at center, #001529 0%, #000 100%);
         }
-
-        .overlay { 
-            background: radial-gradient(circle, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.99) 100%); 
-            min-height: 100vh; 
-            padding: 20px; 
+        /* تصميم يشبه الصورة التي أرفقتها */
+        .terminal-header {
+            text-align: center; padding: 40px; border-bottom: 2px solid var(--cyan);
+            background: rgba(0,0,0,0.8); box-shadow: 0 0 20px var(--cyan);
         }
-
-        header { text-align: center; animation: fadeIn 2s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .main-nav { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 20px; 
-            max-width: 1000px; 
-            margin: 50px auto;
+        .main-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px; max-width: 1200px; margin: 30px auto; padding: 20px;
         }
-
-        .nav-btn {
-            padding: 25px;
-            background: rgba(15, 15, 15, 0.9);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 2px;
-            box-shadow: var(--glow);
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        .nav-card {
+            background: var(--glass); border: 1px solid var(--cyan);
+            padding: 20px; text-align: center; cursor: pointer;
+            transition: 0.3s; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
         }
-
-        .nav-btn:hover { 
-            transform: translateY(-5px); 
-            background: var(--gold); 
-            color: #000; 
-            box-shadow: 0 0 30px var(--gold);
-        }
-
-        .section {
-            display: none; max-width: 1100px; margin: 30px auto;
-            background: var(--glass); padding: 50px; border: 1px solid #222;
-            border-top: 3px solid var(--gold); position: relative;
-            box-shadow: 0 0 50px rgba(0,0,0,1);
-            animation: slideIn 0.5s ease-out;
-        }
-
-        @keyframes slideIn { from { opacity: 0; scale: 0.95; } to { opacity: 1; scale: 1; } }
-
-        .material-content {
-            background: #000; border: 1px double var(--gold); padding: 30px; line-height: 1.8;
-        }
-
-        .materials-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .nav-card:hover { background: var(--cyan); color: #000; box-shadow: 0 0 30px var(--cyan); }
         
-        .mat-btn { 
-            background: #0a0a0a; border: 1px solid #333; color: var(--gold); 
-            width: 65px; height: 65px; cursor: pointer; font-weight: bold;
-            transition: 0.3s;
+        .material-box {
+            background: rgba(0, 5, 10, 0.95); border: 1px solid var(--gold);
+            margin: 20px auto; max-width: 900px; padding: 30px;
+            display: none; animation: scan 0.5s ease-out;
         }
-
-        .mat-btn:hover { border-color: var(--gold); background: var(--gold); color: #000; box-shadow: 0 0 15px var(--gold); }
-
-        input, select { 
-            width: 100%; padding: 15px; margin: 10px 0; background: #050505; 
-            border: 1px solid #333; color: var(--green); font-family: monospace;
-            outline: none;
+        @keyframes scan { from { opacity: 0; transform: scaleY(0); } to { opacity: 1; transform: scaleY(1); } }
+        
+        .grid-numbers { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .num-btn {
+            width: 60px; height: 60px; background: none; border: 1px solid var(--gold);
+            color: var(--gold); cursor: pointer; font-weight: bold;
         }
-
-        .blink-red { color: var(--red); animation: blink 0.5s infinite; font-weight: bold; }
-        @keyframes blink { 50% { opacity: 0; } }
+        .num-btn:hover, .num-btn.active { background: var(--gold); color: #000; }
+        .status-bar { color: var(--cyan); font-family: monospace; font-size: 0.8rem; text-align: center; }
     </style>
 </head>
 <body>
 
-<div class="overlay">
-    <header style="margin-top: 40px;">
-        <h1 style="font-size: 2.8rem; letter-spacing: 10px; margin: 0;">منظومة مكافحة الصقور والكلجات</h1>
-        <div style="width: 400px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 15px auto;"></div>
-        <p style="text-align:center; letter-spacing: 5px;">MAZIN-113255 | ANTI-FALCON PROTOCOL 113-KI</p>
-    </header>
+<div class="terminal-header">
+    <h1 style="letter-spacing: 8px; color: var(--cyan);">مركز العمليات السيادية</h1>
+    <p>IDENTIFICATION: MAZIN-113255 | SYSTEM: ACTIVE</p>
+    <div class="status-bar">> ACCESSING SECURE DATABASE... DONE</div>
+</div>
 
-    <nav class="main-nav">
-        <button class="nav-btn" onclick="showSec('intro')">📜 ديباجة المنظومة</button>
-        <button class="nav-btn" onclick="showSec('index')">📂 الأرشيف الدستوري</button>
-        <button class="nav-btn" onclick="showSec('membership')">📝 طلب استحقاق</button>
-        <button class="nav-btn" onclick="showSec('submissions-auth')">📥 رصد الطلبات</button>
-        <button class="nav-btn" style="grid-column: span 2; border-color: var(--red); color: var(--red);" onclick="showSec('admin-auth')">🛡 غرف القيادة العليا (X-ZONE)</button>
-    </nav>
+<div class="main-grid">
+    <div class="nav-card" onclick="showSec('constitution')">📑 الأرشيف الدستوري</div>
+    <div class="nav-card" onclick="showSec('intro')">📜 ميثاق التأسيس</div>
+    <div class="nav-card" onclick="showSec('member')">📝 استمارة الانتساب</div>
+    <div class="nav-card" style="border-color: var(--red); color: var(--red);">🛡 غرف العمليات X</div>
+</div>
 
-    <div id="intro" class="section">
-        <h2 style="color:var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 15px;">🏛️ ديباجة الدستور السيادي الأعلى</h2>
-        <div style="white-space: pre-wrap; line-height: 2.2; font-size: 1.1rem; text-align: justify; padding: 25px; border: 1px solid #222; background: rgba(0,0,0,0.5);">
-بناءً على الصلاحيات المطلقة الممنوحة للقائد العام MAZIN-113255، وتحت راية "الرسمية المطلقة" التي لا تقبل التأويل، نعلن نحن قيادة الجهاز عن تأسيس هذا الدستور الرقمي ليكون السيف القاطع فوق أعناق الفوضى.
+<div id="intro" class="material-box" style="display: block;">
+    <h2 style="color: var(--cyan);">🏛️ ديباجة السيادة</h2>
+    <p style="line-height: 2; text-align: justify;">نعلن نحن القائد MAZIN-113255 عن تفعيل القبضة الحديدية... الولاء هو شرط البقاء، والكلجات ثغرة أمنية سيتم تطهيرها.</p>
+</div>
 
-"إن هيبة الكلمة هي جوهر السيادة، وإن انضباط الصف هو درع المنظومة."
-        </div>
-    </div>
-
-    <div id="index" class="section">
-        <h2>📂 الأرشيف الدستوري المحمي</h2>
-        <div class="materials-grid" id="mat-grid"></div>
-        <div id="material-display" class="material-content" style="display:none; margin-top:30px;"></div>
-    </div>
-
-    <div id="admin-auth" class="section">
-        <h3 class="blink-red">! WARNING: COMMANDER ACCESS ONLY !</h3>
-        <input type="password" id="admin-code" style="text-align:center; font-size:1.5rem;" placeholder="PASSWORD">
-        <button class="nav-btn" style="width:100%" onclick="loginAdmin()">تفعيل البروتوكول</button>
-    </div>
-
-    <div id="admin-panel" class="section">
-        <h2 style="color:var(--red);">🛡 سجل الهويات الموقوفة</h2>
-        <div id="admin-submissions-list"></div>
-    </div>
-
-    <div id="membership" class="section">
-        <h2>📝 بروتوكول استحقاق العضوية</h2>
-        <form id="member-form">
-            <input type="text" id="m-name" placeholder="الاسم">
-            <input type="text" id="m-family" placeholder="اسم العائلة">
-            <select id="m-gender"><option value="ذكر">ذكر</option><option value="أنثى">أنثى</option></select>
-            <input type="date" id="m-birth">
-            <input type="tel" id="m-phone" placeholder="الرقم الدولي">
-            <input type="email" id="m-email" placeholder="البريد المشفر">
-            <button type="button" class="nav-btn" style="width:100%" onclick="submitForm()">إرسال التقرير للقيادة</button>
-        </form>
-    </div>
-
-    <div id="submissions-auth" class="section">
-        <h2>📥 تتبع ملف الكيان</h2>
-        <input type="text" id="reg-code" placeholder="أدخل كود المرور">
-        <button class="nav-btn" style="width:100%" onclick="viewMySubmission()">استرجاع الحالة</button>
-        <div id="personal-submission-view" class="material-content" style="display:none; margin-top:20px;"></div>
+<div id="constitution" class="material-box">
+    <h2 style="text-align: center;">📂 أرشيف المواد (101 - 159)</h2>
+    <div class="grid-numbers" id="btns-container"></div>
+    <hr style="border-color: #111; margin: 25px 0;">
+    <div id="display-area" style="min-height: 200px; border-right: 3px solid var(--cyan); padding-right: 20px;">
+        <p style="color: #666;">اضغط على رقم المادة لعرض النص السيادي...</p>
     </div>
 </div>
 
 <script>
-    const ADMIN_CODES = ["113255KI", "1100KI"];
-    let db = JSON.parse(localStorage.getItem('vault_v4')) || [];
-
-    const materials = {
-        101: { 
-            t: "مادة المرجعية الإدارية العليا", 
-            n: "تُقر هذه المادة بأن القائد MAZIN-113255 هو المرجع الأول والأخير لجميع القرارات التنظيمية والتشريعية.", 
-            d: "لا يُعتد بأي إجراء إداري ما لم يحمل موافقة صريحة من الإدارة العليا.", 
-            h: "أي محاولة لتجاوز المرجعية تؤدي إلى إنهاء العضوية فوراً وبشكل قطعي.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        102: { 
-            t: "مادة التنظيم الهيكلي", 
-            n: "يتم توزيع المسؤوليات بناءً على الكفاءة والولاء التنظيمي. يُمنع منعاً باتاً إنشاء أي مجموعات ضغط.", 
-            d: "يُمنع إضعاف الهيكل الإداري العام عبر التكتلات.", 
-            h: "خفض الصلاحيات الإدارية للمخالف ووضعه تحت الرقابة لمدة 30 يوماً.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        103: { 
-            t: "مادة حماية الأصول المعلوماتية", 
-            n: "تُصنف الأكواد وقواعد البيانات كأصول سرية للغاية.", 
-            d: "يُحظر تداول المراسلات الداخلية خارج النطاق المسموح به.", 
-            h: "الحظر التقني من جميع المنصات والملاحقة بتهمة إفشاء الأسرار.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        104: { 
-            t: "مادة حماية الخصوصية الإدارية", 
-            n: "يمنع التدخل في الشؤون الشخصية للأعضاء أو استخدام البيانات لأغراض غير رسمية.", 
-            d: "استخدام البيانات الإدارية خارج نطاق العمل يُعد مخالفة.", 
-            h: "توجيه إنذار نهائي، وفي حال التكرار يتم سحب الهوية الرقمية.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        105: { 
-            t: "بروتوكول التوثيق والانتساب", 
-            n: "الالتزام بالدقة الكاملة في ملء الاستمارة المكونة من 10 خانات.", 
-            d: "أي كشط أو تزوير في البيانات يجعل العضوية باطلة قانوناً.", 
-            h: "رفض طلب الانتساب مع منع استرداد الرسوم المعنوية المرتبطة بها.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        106: { 
-            t: "مادة الهوية الرسمية", 
-            n: "الكود الرقمي الممنوح لكل عضو هو الوسيلة الوحيدة لإثبات الشخصية.", 
-            d: "يُمنع إعارة الهوية أو السماح للغير باستخدامها.", 
-            h: "إلغاء الكود فوراً واعتبار العضو منتحلاً للشخصية عند التفريط بالبيانات.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        107: { 
-            t: "مادة الشفافية والبلاغات", 
-            n: "يُشجع الجهاز على التبليغ عن التجاوزات. التبليغ الكيدي جريمة إدارية.", 
-            d: "التبليغ الكيدي يُعامل كفعل إجرامي مستقل.", 
-            h: "وقوع العقوبة المقررة للمدعى عليه على المبلغ نفسه إذا ثبت الكذب.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        108: { 
-            t: "مادة مكافحة التزوير الرقمي", 
-            n: "يُحظر التلاعب بتصميم البطاقات السيادية أو تعديل الرتب دون تصريح.", 
-            d: "التعديل في واجهة النظام دون إذن يُعد تزويراً.", 
-            h: "الحظر النهائي ووضع الاسم في قائمة 'المحرومين من الموثوقية'.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        109: { 
-            t: "مادة التقييم الدوري", 
-            n: "يخضع جميع الأعضاء لتقييم دوري لضمان الالتزام بمعايير الوقار.", 
-            d: "الإنتاجية الإدارية هي معيار البقاء.", 
-            h: "تجميد الحساب حتى اجتياز دورة تأهيلية عند فشل التقييم.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        110: { 
-            t: "مادة التنسيق المشترك", 
-            n: "يمنع التواصل مع جهات خارجية باسم الجهاز دون تفويض رسمي مكتوب.", 
-            d: "التفويض يجب أن يكون موقعاً من القائد شخصياً.", 
-            h: "سحب الصفة الرسمية واعتبار التصرفات شخصية لا تمثل الجهاز.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        111: { 
-            t: "مادة السلوك العام والوقار", 
-            n: "الالتزام بالآداب العامة والخطاب الراقي. يمنع الانجرار خلف الاستفزازات.", 
-            d: "الوقار في النقاشات هو سمة أعضاء المنظومة.", 
-            h: "لفت نظر رسمي يليه تعليق العضوية لمدة أسبوع عند التكرار.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        112: { 
-            t: "مادة مكافحة الفوضى", 
-            n: "يُمنع نشر أي محتوى يهدف إلى إثارة البلبلة أو التشكيك في نزاهة الإدارة.", 
-            d: "التشكيك في القرارات السيادية يُواجه بالحزم.", 
-            h: "الإقصاء الإداري المباشر وحذف جميع السجلات من الأرشيف.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        113: { 
-            t: "مادة الطوارئ الإدارية", 
-            n: "يحق للقائد تعطيل بعض البنود مؤقتاً واتخاذ إجراءات حازمة وقت الأزمات.", 
-            d: "حماية استقرار الجهاز تتطلب صلاحيات استثنائية.", 
-            h: "مخالفة أوامر الطوارئ تُعد تمرداً وعقوبتها النفي الفوري.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        158: { 
-            t: "مادة الوقار اللغوي (محاسبة الكلجات)", 
-            n: "الإصرار على الأخطاء الجسيمة يُضعف هيبة المؤسسة.", 
-            d: "الخطأ العفوي يتطلب المراجعة، أما الإصرار فيُعاقب عليه.", 
-            h: "التقييد الكتابي (وضع الصمت) حتى تقديم اعتذار إداري وقور.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        },
-        159: { 
-            t: "مادة مكافحة الترصد الكيدي (الصقرجة)", 
-            n: "يُجرم الترصد لعثرات الآخرين وتوثيقها بغرض الإساءة.", 
-            d: "هذا السلوك يتنافى تماماً مع ميثاق الشرف الإداري.", 
-            h: "الإعدام الرقمي التام؛ محو الهوية والبيانات ومنع العودة نهائياً.", 
-            p: "توقيع: القائد MAZIN-113255" 
-        }
+    const protocolData = {
+        101: { t: "المرجعية الإدارية العليا", n: "القائد MAZIN-113255 هو المرجع الأول والأخير.", h: "الإنهاء الفوري للعضوية عند التجاوز." },
+        102: { t: "التنظيم الهيكلي", n: "يُمنع إنشاء تكتلات تضعف الهيكل الإداري.", h: "الرقابة التقييمية لمدة 30 يوماً." },
+        103: { t: "حماية الأصول المعلوماتية", n: "الأكواد والمراسلات أصول سرية للغاية.", h: "الحظر التقني والملاحقة الإدارية." },
+        104: { t: "حماية الخصوصية الإدارية", n: "يمنع التدخل في الشؤون الشخصية أو استخدام البيانات.", h: "إنذار نهائي ثم سحب الهوية." },
+        105: { t: "بروتوكول التوثيق", n: "الدقة الكاملة في الاستمارة شرط أساسي.", h: "بطلان العضوية عند أي تزوير." },
+        106: { t: "الهوية الرسمية", n: "الكود الرقمي هو وسيلة إثبات الشخصية الوحيدة.", h: "إلغاء الكود واعتباره منتحلاً." },
+        107: { t: "الشفافية والبلاغات", n: "البلاغات الكيدية جريمة إدارية.", h: "نقل العقوبة للمبلغ في حال الكذب." },
+        108: { t: "مكافحة التزوير الرقمي", n: "يُحظر التلاعب بالتصاميم أو الرتب.", h: "قائمة 'المحرومين من الموثوقية'." },
+        109: { t: "التقييم الدوري", n: "تجميد الحساب عند الفشل في معايير الوقار.", h: "دورة تأهيلية إجبارية." },
+        110: { t: "التنسيق المشترك", n: "يمنع التواصل الخارجي باسم الجهاز دون تفويض.", h: "سحب الصفة الرسمية فوراً." },
+        111: { t: "السلوك العام والوقار", n: "الالتزام بالخطاب الراقي في النقاشات.", h: "تعليق العضوية لمدة أسبوع." },
+        112: { t: "مكافحة الفوضى", n: "يمنع نشر محتوى يثير البلبلة ضد الإدارة.", h: "الإقصاء الإداري الشامل." },
+        113: { t: "الطوارئ الإدارية", n: "للقائد حق تعطيل البنود وقت الأزمات.", h: "مخالفة الأوامر تُعد تمرداً." },
+        158: { t: "الوقار اللغوي (الكلجات)", n: "الإصرار على الأخطاء يُضعف هيبة المؤسسة.", h: "وضع الصمت حتى تقديم اعتذار وقور." },
+        159: { t: "مكافحة الترصد (الصقرجة)", n: "يُجرم الترصد لعثرات الآخرين بغرض الإساءة.", h: "الإعدام الرقمي التام ومحو البيانات." }
     };
 
-    function generateMatGrid() {
-        const grid = document.getElementById('mat-grid');
-        Object.keys(materials).forEach(id => {
-            let b = document.createElement('button'); b.className = 'mat-btn'; b.innerText = id;
-            b.onclick = () => showMaterial(id); grid.appendChild(b);
+    function init() {
+        const container = document.getElementById('btns-container');
+        Object.keys(protocolData).forEach(num => {
+            let b = document.createElement('button');
+            b.className = 'num-btn'; b.innerText = num;
+            b.onclick = () => {
+                document.querySelectorAll('.num-btn').forEach(x => x.classList.remove('active'));
+                b.classList.add('active');
+                renderMat(num);
+            };
+            container.appendChild(b);
         });
     }
-    generateMatGrid();
 
-    function showMaterial(id) {
-        const d = document.getElementById('material-display');
-        const m = materials[id];
-        d.innerHTML = `<h3>🛡️ المادة (${id}): ${m.t}</h3><p><b>المضمون:</b> ${m.n}</p><p><b>التفصيل:</b> ${m.d}</p><p><b>الإجراء الجزائي:</b> ${m.h}</p><p><b>${m.p}</b></p>`;
-        d.style.display = 'block';
+    function renderMat(id) {
+        const m = protocolData[id];
+        document.getElementById('display-area').innerHTML = `
+            <h3 style="color:var(--cyan)">🛡️ المادة (${id}): ${m.t}</h3>
+            <p><b>المضمون السيادي:</b> ${m.n}</p>
+            <p style="color:var(--red)"><b>الإجراء الجزائي:</b> ${m.h}</p>
+            <p style="font-size:0.8rem; border-top:1px solid #222; padding-top:10px;">توقيع: القائد MAZIN-113255</p>
+        `;
     }
 
     function showSec(id) {
-        document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+        document.querySelectorAll('.material-box').forEach(s => s.style.display = 'none');
         document.getElementById(id).style.display = 'block';
     }
 
-    function submitForm() {
-        const code = Math.floor(100000 + Math.random() * 900000) + "KI";
-        db.push({ id: Date.now(), name: document.getElementById('m-name').value, code: code, status: 'pending' });
-        localStorage.setItem('vault_v4', JSON.stringify(db));
-        alert("تم الإرسال. كودك: " + code);
-    }
-
-    function loginAdmin() {
-        if(ADMIN_CODES.includes(document.getElementById('admin-code').value)) { showSec('admin-panel'); renderAdmin(); }
-        else { alert("ACCESS DENIED"); }
-    }
-
-    function renderAdmin() {
-        const list = document.getElementById('admin-submissions-list');
-        list.innerHTML = db.map(s => `<div class="admin-card">${s.name} - ${s.code}</div>`).join('');
-    }
-
-    function viewMySubmission() {
-        const s = db.find(x => x.code === document.getElementById('reg-code').value);
-        if(s) { document.getElementById('personal-submission-view').innerHTML = `<p>الحالة: ${s.status}</p>`; document.getElementById('personal-submission-view').style.display = 'block'; }
-        else { alert("كود خاطئ"); }
-    }
+    init();
 </script>
 </body>
 </html>
