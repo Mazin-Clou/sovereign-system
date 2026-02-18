@@ -25,7 +25,7 @@
         .nav-link { color: var(--cyan); text-decoration: none; font-weight: bold; font-size: 0.9rem; cursor: pointer; transition: 0.3s; }
         .hero { padding: 130px 20px 50px; text-align: center; }
         
-        /* شبكة الأزرار الضخمة (100+ زر) */
+        /* شبكة الـ 100 زر */
         .ops-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 10px; max-width: 1300px; margin: 0 auto; padding: 20px;
@@ -51,7 +51,7 @@
         .m-num.active { background: var(--gold); color: #000; }
         
         .admin-card { background: rgba(255,255,255,0.03); border-right: 4px solid var(--gold); padding: 15px; margin-bottom: 10px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--cyan); color: var(--gold); }
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--cyan); color: var(--gold); }
         .status-feed { font-family: monospace; color: #0f0; background: #000; padding: 10px; height: 100px; overflow-y: auto; font-size: 0.75rem; border: 1px solid #111; }
     </style>
 </head>
@@ -59,97 +59,183 @@
 
 <nav class="top-nav">
     <div class="nav-link" onclick="showSec('home')">🏠 الرئيسية</div>
-    <div class="nav-link" onclick="showSec('constitution')">📜 الدستور</div>
+    <div class="nav-link" onclick="showSec('constitution')">📜 الدستور الكامل</div>
     <div class="nav-link" onclick="showSec('forms')">📝 الاستمارات</div>
     <div class="nav-link" style="color:var(--red)" onclick="showSec('vault')">🔐 الخزنة السيادية</div>
 </nav>
 
 <div class="hero">
-    <h1 style="font-size: 2.5rem; margin: 0; letter-spacing: 5px;">MAZIN-113255 | CENTRAL HUB</h1>
-    <p style="color: var(--cyan); font-size: 0.8rem;">OPERATIONAL DATA TERMINAL - 100+ MODULES ACTIVE</p>
+    <h1 style="font-size: 2.5rem; margin: 0; letter-spacing: 5px;">MAZIN-113255 | CENTRAL COMMAND</h1>
+    <p style="color: var(--cyan); font-size: 0.8rem;">SOVEREIGN CONTROL INTERFACE v5.0</p>
 </div>
 
 <div class="ops-grid" id="mega-grid"></div>
 
+<div id="home" class="container active-sec">
+    <h2 style="color: var(--cyan); border-bottom: 2px solid var(--cyan); padding-bottom: 15px;">🏛️ ديباجة السيادة العليا (وثيقة القبضة الحديدية)</h2>
+    <div style="white-space: pre-wrap; line-height: 2.5; text-align: justify; font-size: 1.1rem;">
+بناءً على الصلاحيات المطلقة الممنوحة للقائد العام MAZIN-113255، وتحت راية "الرسمية المطلقة" التي لا تقبل التأويل، نعلن نحن قيادة الجهاز عن تأسيس هذا الدستور الرقمي ليكون السيف القاطع فوق أعناق الفوضى.
+"إن هيبة الكلمة هي جوهر السيادة، وإن انضباط الصف هو درع المنظومة."
+أولاً: غاية التأسيس.. أُسس هذا الكيان ليكون مصفاةً للنخبة، ومقصلةً لكل من تسول له نفسه العبث برسمية الحوار.
+ثانياً: إعلان الحرب على "الكلجات".. تعتبر المنظومة أن "الكلجة" ثغرة أمنية تعكس تشتت العضو.
+ثالثاً: كسر "أجنحة الصقور".. إن كل "صقر" يحاول التغريد خارج سرب الولاء سيواجه النفي الشامل.
+"ليعلم القاصي والداني، أن القانون في هذه القلعة يُكتب بحبر الولاء، ويُطبق بصرامة الجلاد."
+    </div>
+</div>
+
 <div id="constitution" class="container">
-    <h2 style="text-align:center;">📂 الأرشيف الدستوري المحمي</h2>
+    <h2 style="text-align:center; color:var(--cyan);">📂 الأرشيف الدستوري (101 - 159)</h2>
     <div class="mat-grid" id="mat-btns-container"></div>
-    <div id="mat-display" style="margin-top:20px; padding:20px; border:1px solid var(--gold);"></div>
+    <div id="mat-display" style="margin-top:20px; padding:20px; border:1px solid var(--gold); background:rgba(0,0,0,0.5); min-height:150px;">
+        <p style="text-align:center; color:#555;">[ بانتظار فك تشفير المادة ]</p>
+    </div>
 </div>
 
 <div id="forms" class="container">
     <h2>📝 بوابة تقديم البيانات</h2>
-    <select id="f-type" style="width:100%; padding:10px; background:#000; color:var(--gold); border:1px solid var(--cyan);">
+    <select id="f-type">
         <option>طلب ترقية (نخبة)</option>
         <option>بلاغ عن صقر</option>
+        <option>إصدار هوية سيادية</option>
     </select>
     <input type="text" id="f-name" placeholder="الاسم الرمزي">
-    <textarea id="f-desc" rows="4" style="width:100%; background:#000; color:var(--gold); border:1px solid var(--cyan);" placeholder="التفاصيل..."></textarea>
-    <button onclick="submitNewRequest()" style="width:100%; padding:15px; background:var(--cyan); border:none; margin-top:10px; cursor:pointer;">إرسال إلى الخزنة المشفرة</button>
+    <textarea id="f-desc" rows="4" placeholder="التفاصيل..."></textarea>
+    <button onclick="submitNewRequest()" style="width:100%; padding:15px; background:var(--cyan); border:none; cursor:pointer; font-weight:bold;">إرسال إلى مركز الاستخبارات</button>
 </div>
 
 <div id="vault" class="container">
-    <h2 style="color:var(--red)">🔐 الخزنة السيادية (نطاق القيادة)</h2>
+    <h2 style="color:var(--red)">🔐 الخزنة السيادية (مركز التحكم المطلق)</h2>
     <div id="vault-auth">
-        <input type="password" id="vault-key" placeholder="أدخل رمز العبور 113255KI" style="text-align:center;">
-        <button onclick="unlockVault()" style="width:100%; padding:10px; background:var(--red); color:white; border:none; cursor:pointer;">فك التشفير</button>
+        <input type="password" id="vault-key" placeholder="أدخل رمز العبور السيادي" style="text-align:center;">
+        <button onclick="unlockVault()" style="width:100%; padding:10px; background:var(--red); border:none; cursor:pointer;">دخول</button>
     </div>
     
     <div id="vault-content" style="display:none;">
-        <h3 style="color:var(--cyan); border-bottom:1px solid var(--cyan);">👁️ مركز الاستخبارات ورصد الاستمارات</h3>
-        <div class="status-feed" id="live-logs"></div>
+        <h3 style="color:var(--cyan);">👁️ مركز الاستخبارات ورصد الاستمارات</h3>
+        <div id="admin-request-list"></div>
         
-        <div id="admin-request-list" style="margin-top:20px;"></div>
+        <hr style="border-color:var(--cyan);">
+        
+        <h3 style="color:var(--gold);">🛠️ محرر النودات السيادي (تعديل الـ 100 زر)</h3>
+        <select id="edit-node-id" onchange="loadNodeForEdit()">
+            <option value="">اختر الزر للتعديل...</option>
+        </select>
+        <input type="text" id="edit-node-title" placeholder="عنوان الزر الجديد">
+        <textarea id="edit-node-body" rows="4" placeholder="محتوى القصة أو التقرير..."></textarea>
+        <button onclick="saveNodeChange()" style="background:var(--gold); color:#000; border:none; padding:10px; width:100%; font-weight:bold;">حفظ التغيير الدائم</button>
         
         <hr style="border-color:var(--red);">
-        <button onclick="destroyAll()" style="width:100%; padding:15px; background:none; border:2px solid var(--red); color:var(--red); font-weight:bold; cursor:pointer;">🔥 تدمير شامل لقاعدة البيانات (المعاينة والحذف)</button>
-        
-        <div id="destruction-zone" style="margin-top:20px; display:none; background:rgba(255,0,0,0.1); padding:10px; border:1px dashed var(--red);">
-            <h4>⚠️ ملفات التدمير النهائي:</h4>
-            <div id="destruction-list"></div>
-        </div>
+        <button onclick="destroyAll()" style="width:100%; padding:10px; background:none; border:2px solid var(--red); color:var(--red); margin-top:10px;">🔥 تدمير شامل لقاعدة البيانات</button>
+        <div id="destruction-list"></div>
     </div>
-</div>
-
-<div id="home" class="container active-sec">
-    <h2>🏛️ ديباجة السيادة</h2>
-    <p style="white-space: pre-wrap; line-height:2;">نعلن تفعيل ميثاق "القبضة الحديدية". هذا الكيان هو مقصلة الفوضى ومنبع الرسمية المطلقة.</p>
 </div>
 
 <div id="article-section" class="container">
     <h2 id="art-title" style="color:var(--cyan)"></h2>
     <div id="art-body" style="line-height:2; white-space:pre-wrap;"></div>
-    <button onclick="showSec('home')" style="border:1px solid var(--cyan); background:none; color:var(--cyan); padding:10px 20px; cursor:pointer;">إغلاق الملف</button>
+    <button onclick="showSec('home')" style="border:1px solid var(--cyan); background:none; color:var(--cyan); padding:10px 20px; cursor:pointer;">عودة</button>
 </div>
 
 <script>
-    const constitutionData = { 101: {t:"المرجعية العليا", n:"القائد MAZIN هو المرجع الأول.", h:"النفي الفوري."}, 158: {t:"محاسبة الكلجات", n:"الكلجة ثغرة أمنية.", h:"الصمت الإداري."}, 159: {t:"مكافحة الصقرجة", n:"يمنع الترصد للعثرات.", h:"الإعدام الرقمي."} };
-    
-    // توليد 100 زر مع بيانات الصقور
-    function generateMegaGrid() {
+    const constitutionData = {
+        101: {t:"المرجعية الإدارية العليا", n:"القائد MAZIN-113255 هو المرجع الأول والأخير لجميع القرارات.", h:"إنهاء العضوية فوراً."},
+        102: {t:"التنظيم الهيكلي", n:"يُمنع إنشاء أي تكتلات تهدف لإضعاف الهيكل الإداري العام.", h:"خفض الصلاحيات والرقابة لمدة 30 يوماً."},
+        103: {t:"حماية الأصول", n:"تُصنف المراسلات الداخلية كأصول سرية للغاية.", h:"الحظر التقني والملاحقة."},
+        104: {t:"حماية الخصوصية", n:"يمنع التدخل في الشؤون الشخصية للأعضاء.", h:"إنذار نهائي وسحب الهوية."},
+        105: {t:"بروتوكول التوثيق", n:"الالتزام بالدقة في الاستمارات. أي تزوير يبطل العضوية.", h:"منع الانتساب نهائياً."},
+        106: {t:"الهوية الرسمية", n:"كود 113-KI هو الوسيلة الوحيدة لإثبات الشخصية.", h:"إلغاء الكود فوراً."},
+        107: {t:"الشفافية", n:"التبليغ الكيدي يُعامل كجريمة إدارية.", h:"نقل العقوبة للمُبلغ الكاذب."},
+        108: {t:"مكافحة التزوير", n:"يُحظر التلاعب بتصميم البطاقات السيادية.", h:"الحظر النهائي من النظام."},
+        109: {t:"التقييم الدوري", n:"يخضع الأعضاء لتقييم الوقار والإنتاجية.", h:"تجميد الحساب حتى التأهيل."},
+        110: {t:"التنسيق المشترك", n:"يمنع التواصل الخارجي باسم الجهاز دون تفويض.", h:"سحب الصفة الرسمية."},
+        111: {t:"السلوك والوقار", n:"الالتزام بالخطاب الراقي ومنع الاستفزاز.", h:"تعليق العضوية لمدة أسبوع."},
+        112: {t:"مكافحة الفوضى", n:"يُمنع نشر محتوى يثير البلبلة ضد الإدارة.", h:"الإقصاء وحذف السجلات."},
+        113: {t:"الطوارئ الإدارية", n:"للقائد حق تعطيل البنود مؤقتاً لحماية الاستقرار.", h:"مخالفة الأوامر تُعد تمرداً."},
+        158: {t:"مادة الوقار (الكلجات)", n:"الكلجة ثغرة تضعف هيبة المؤسسة.", h:"وضع الصمت حتى الاعتذار."},
+        159: {t:"مكافحة الصقرجة", n:"يُجرم الترصد لعثرات الآخرين بغرض الإساءة.", h:"الإعدام الرقمي ومحو الهوية."}
+    };
+
+    let nodeDB = JSON.parse(localStorage.getItem('nodeDB')) || {};
+
+    function initMegaGrid() {
         const grid = document.getElementById('mega-grid');
+        const select = document.getElementById('edit-node-id');
+        grid.innerHTML = ""; select.innerHTML = '<option value="">اختر الزر للتعديل...</option>';
+        
         for(let i=1; i<=100; i++) {
+            let node = nodeDB[i] || {
+                t: `NODE_SIGNAL_${i}`,
+                b: i % 2 === 0 ? `تقرير استخباري: رصد المطلوب "صخر" وهو يترصد للضحية خالد تكاس قرب الـ 16 قلقة.` : `تقرير استخباري: العضو "منذر" يحاول اختراق بروتوكول خالد تكاس اللغوي.`
+            };
+            
             let btn = document.createElement('button');
             btn.className = 'op-btn';
-            btn.innerText = `DATA_NODE_${i}`;
-            btn.onclick = () => loadMegaData(i);
+            btn.innerText = node.t;
+            btn.onclick = () => {
+                document.getElementById('art-title').innerText = node.t;
+                document.getElementById('art-body').innerText = node.b;
+                showSec('article-section');
+            };
             grid.appendChild(btn);
+            
+            let opt = document.createElement('option');
+            opt.value = i; opt.innerText = `زر رقم ${i} (${node.t})`;
+            select.appendChild(opt);
         }
     }
 
-    function loadMegaData(i) {
-        const title = `التقرير الاستخباري رقم #${i}`;
-        let body = "";
-        if(i % 5 === 0) {
-            body = `رصد الصقر البشري "آدم". \nالموقع: قرب الـ 16 قلقة. \nالحالة: يصطاد الضحية "خالد تكاس" في عملية استدراج رقمية معقدة. \nالتوصية: المراقبة اللصيقة.`;
-        } else if(i % 3 === 0) {
-            body = `تحليل سلوك الصقور البشرية: العضو "آدم" يظهر نشاطاً مريباً في غرف الاستقبال. \nخالد تكاس تحت المجهر السيادي الآن.`;
-        } else {
-            body = `بيانات مشفرة للنود رقم ${i}. \nالنظام مستقر. لا توجد كلجات مرصودة في هذا القطاع.`;
-        }
-        document.getElementById('art-title').innerText = title;
-        document.getElementById('art-body').innerText = body;
-        showSec('article-section');
+    function loadNodeForEdit() {
+        const id = document.getElementById('edit-node-id').value;
+        if(!id) return;
+        const node = nodeDB[id] || {t: `NODE_SIGNAL_${id}`, b: ""};
+        document.getElementById('edit-node-title').value = node.t;
+        document.getElementById('edit-node-body').value = node.b;
+    }
+
+    function saveNodeChange() {
+        const id = document.getElementById('edit-node-id').value;
+        if(!id) return alert("اختر زراً أولاً!");
+        nodeDB[id] = {
+            t: document.getElementById('edit-node-title').value,
+            b: document.getElementById('edit-node-body').value
+        };
+        localStorage.setItem('nodeDB', JSON.stringify(nodeDB));
+        alert("تم الحفظ السيادي الدائم!");
+        initMegaGrid();
+    }
+
+    function initConstit() {
+        const container = document.getElementById('mat-btns-container');
+        Object.keys(constitutionData).forEach(id => {
+            let b = document.createElement('div'); b.className = 'm-num'; b.innerText = id;
+            b.onclick = () => {
+                const m = constitutionData[id];
+                document.getElementById('mat-display').innerHTML = `<h3>${m.t}</h3><p>${m.n}</p><p style="color:var(--red)"><b>الجزاء:</b> ${m.h}</p>`;
+            };
+            container.appendChild(b);
+        });
+    }
+
+    function unlockVault() {
+        if(document.getElementById('vault-key').value === '113255KI') {
+            document.getElementById('vault-auth').style.display = 'none';
+            document.getElementById('vault-content').style.display = 'block';
+            renderIntel();
+        } else { alert("رمز خاطئ!"); }
+    }
+
+    function submitNewRequest() {
+        let db = JSON.parse(localStorage.getItem('intel_requests') || '[]');
+        db.push({ id: Date.now(), type: document.getElementById('f-type').value, name: document.getElementById('f-name').value, desc: document.getElementById('f-desc').value });
+        localStorage.setItem('intel_requests', JSON.stringify(db));
+        alert("تم الإرسال للخزنة.");
+    }
+
+    function renderIntel() {
+        let db = JSON.parse(localStorage.getItem('intel_requests') || '[]');
+        const list = document.getElementById('admin-request-list');
+        list.innerHTML = db.length ? '' : '<p>لا استمارات حالية.</p>';
+        db.forEach(r => { list.innerHTML += `<div class="admin-card"><b>${r.type}</b>: ${r.name}<br>${r.desc}</div>`; });
     }
 
     function showSec(id) {
@@ -157,60 +243,7 @@
         document.getElementById(id).classList.add('active-sec');
     }
 
-    function unlockVault() {
-        if(document.getElementById('vault-key').value === '113255KI') {
-            document.getElementById('vault-auth').style.display = 'none';
-            document.getElementById('vault-content').style.display = 'block';
-            renderIntelRequests();
-        } else { alert("تنبيه: محاولة تسلل!"); }
-    }
-
-    function submitNewRequest() {
-        const req = { id: Date.now(), type: document.getElementById('f-type').value, name: document.getElementById('f-name').value, desc: document.getElementById('f-desc').value };
-        let db = JSON.parse(localStorage.getItem('intel_requests') || '[]');
-        db.push(req);
-        localStorage.setItem('intel_requests', JSON.stringify(db));
-        alert("تم التشفير والإرسال للخزنة.");
-    }
-
-    function renderIntelRequests() {
-        let db = JSON.parse(localStorage.getItem('intel_requests') || '[]');
-        const list = document.getElementById('admin-request-list');
-        list.innerHTML = db.length ? '' : '<p>لا توجد استمارات واردة.</p>';
-        db.forEach(r => {
-            list.innerHTML += `<div class="admin-card"><b>${r.type}</b>: ${r.name} <br> <small>${r.desc}</small></div>`;
-        });
-    }
-
-    function destroyAll() {
-        const zone = document.getElementById('destruction-zone');
-        const list = document.getElementById('destruction-list');
-        let db = JSON.parse(localStorage.getItem('intel_requests') || '[]');
-        zone.style.display = 'block';
-        list.innerHTML = "";
-        db.forEach(r => {
-            list.innerHTML += `<div style="border-bottom:1px solid red; padding:5px;">[جاهز للحذف] استمارة: ${r.name} - ${r.type} <button onclick="finalDelete(${r.id})" style="color:red; background:none; border:1px solid red;">حذف نهائي</button></div>`;
-        });
-    }
-
-    function finalDelete(id) {
-        let db = JSON.parse(localStorage.getItem('intel_requests') || '[]');
-        db = db.filter(x => x.id !== id);
-        localStorage.setItem('intel_requests', JSON.stringify(db));
-        destroyAll();
-        renderIntelRequests();
-    }
-
-    function initConstit() {
-        const container = document.getElementById('mat-btns-container');
-        Object.keys(constitutionData).forEach(id => {
-            let b = document.createElement('div'); b.className = 'm-num'; b.innerText = id;
-            b.onclick = () => { document.getElementById('mat-display').innerHTML = `<h3>${constitutionData[id].t}</h3><p>${constitutionData[id].n}</p><p style="color:red">${constitutionData[id].h}</p>`; };
-            container.appendChild(b);
-        });
-    }
-
-    window.onload = () => { generateMegaGrid(); initConstit(); };
+    window.onload = () => { initMegaGrid(); initConstit(); };
 </script>
 </body>
 </html>
