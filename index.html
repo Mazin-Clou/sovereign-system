@@ -3,125 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز القيادة السيادية | MAZIN-113255</title>
+    <title>المنظومة السيادية العليا | MAZIN-113255</title>
     <style>
         :root {
-            --gold: #d4af37; --red: #ff3e3e; --cyan: #00f3ff;
-            --bg: #02050a; --glass: rgba(0, 20, 40, 0.9);
+            --gold: #d4af37; --red: #ff3030; --cyan: #00f3ff;
+            --bg: #010409; --glass: rgba(0, 15, 30, 0.85);
+            --border: rgba(0, 243, 255, 0.3);
         }
+
         body {
             background: var(--bg); color: var(--gold);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0; overflow-x: hidden;
-            background-image: radial-gradient(circle at center, #001529 0%, #000 100%);
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
         }
-        /* تصميم يشبه الصورة التي أرفقتها */
-        .terminal-header {
-            text-align: center; padding: 40px; border-bottom: 2px solid var(--cyan);
-            background: rgba(0,0,0,0.8); box-shadow: 0 0 20px var(--cyan);
+
+        /* القائمة العلوية المحكمة */
+        .top-nav {
+            position: fixed; top: 0; width: 100%; height: 60px;
+            background: var(--glass); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--cyan); z-index: 1000;
+            display: flex; justify-content: center; align-items: center; gap: 30px;
         }
-        .main-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px; max-width: 1200px; margin: 30px auto; padding: 20px;
+
+        .nav-link {
+            color: var(--cyan); text-decoration: none; font-weight: bold;
+            text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
+            transition: 0.3s; cursor: pointer;
         }
-        .nav-card {
-            background: var(--glass); border: 1px solid var(--cyan);
-            padding: 20px; text-align: center; cursor: pointer;
-            transition: 0.3s; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+
+        .nav-link:hover { color: #fff; text-shadow: 0 0 10px var(--cyan); }
+
+        /* رأس الصفحة الرقمي */
+        .hero {
+            padding: 120px 20px 60px; text-align: center;
+            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
         }
-        .nav-card:hover { background: var(--cyan); color: #000; box-shadow: 0 0 30px var(--cyan); }
-        
-        .material-box {
-            background: rgba(0, 5, 10, 0.95); border: 1px solid var(--gold);
-            margin: 20px auto; max-width: 900px; padding: 30px;
-            display: none; animation: scan 0.5s ease-out;
+
+        .scanner-line {
+            width: 100%; height: 2px; background: var(--cyan);
+            position: absolute; top: 0; left: 0; opacity: 0.5;
+            animation: scan-move 4s linear infinite;
         }
-        @keyframes scan { from { opacity: 0; transform: scaleY(0); } to { opacity: 1; transform: scaleY(1); } }
-        
-        .grid-numbers { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-        .num-btn {
-            width: 60px; height: 60px; background: none; border: 1px solid var(--gold);
-            color: var(--gold); cursor: pointer; font-weight: bold;
+
+        @keyframes scan-move { 0% { top: 0; } 100% { top: 100vh; } }
+
+        /* شبكة الأزرار المتخلخلة */
+        .ops-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px; max-width: 1100px; margin: 0 auto 40px; padding: 20px;
         }
-        .num-btn:hover, .num-btn.active { background: var(--gold); color: #000; }
-        .status-bar { color: var(--cyan); font-family: monospace; font-size: 0.8rem; text-align: center; }
+
+        .op-btn {
+            background: rgba(0, 20, 40, 0.6); border: 1px solid var(--border);
+            padding: 15px; color: var(--cyan); font-size: 0.8rem;
+            cursor: pointer; transition: 0.4s; position: relative; overflow: hidden;
+        }
+
+        .op-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(0,243,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .op-btn:hover::before { left: 100%; }
+        .op-btn:hover { border-color: var(--cyan); box-shadow: 0 0 15px var(--cyan); transform: translateY(-3px); }
+
+        /* الحاويات الرئيسية */
+        .container {
+            max-width: 1000px; margin: 20px auto; padding: 40px;
+            background: var(--glass); border: 1px solid var(--border);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5); display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+        .active-sec { display: block; }
+
+        /* تنسيق المواد */
+        .mat-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
+        .m-num {
+            width: 50px; height: 50px; border: 1px solid var(--gold);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-weight: bold; transition: 0.3s;
+        }
+        .m-num:hover, .m-num.active { background: var(--gold); color: #000; }
+
+        .detail-card {
+            background: rgba(0,0,0,0.6); border-right: 4px solid var(--cyan);
+            padding: 25px; line-height: 1.8;
+        }
     </style>
 </head>
 <body>
 
-<div class="terminal-header">
-    <h1 style="letter-spacing: 8px; color: var(--cyan);">مركز العمليات السيادية</h1>
-    <p>IDENTIFICATION: MAZIN-113255 | SYSTEM: ACTIVE</p>
-    <div class="status-bar">> ACCESSING SECURE DATABASE... DONE</div>
+<div class="scanner-line"></div>
+
+<nav class="top-nav">
+    <div class="nav-link" onclick="showSec('home')">🏠 الرئيسية</div>
+    <div class="nav-link" onclick="showSec('constitution')">⚖️ الدستور السيادي</div>
+    <div class="nav-link" onclick="showSec('services')">🛠️ الخدمات</div>
+    <div class="nav-link" style="color:var(--red)" onclick="alert('بروتوكول الطوارئ مغلق')">⚠️ الطوارئ</div>
+</nav>
+
+<div class="hero">
+    <h1 style="font-size: 3rem; margin: 0; color: var(--gold); text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);">MAZIN-113255</h1>
+    <p style="color: var(--cyan); letter-spacing: 4px;">SOVEREIGN CONTROL INTERFACE v4.0.1</p>
 </div>
 
-<div class="main-grid">
-    <div class="nav-card" onclick="showSec('constitution')">📑 الأرشيف الدستوري</div>
-    <div class="nav-card" onclick="showSec('intro')">📜 ميثاق التأسيس</div>
-    <div class="nav-card" onclick="showSec('member')">📝 استمارة الانتساب</div>
-    <div class="nav-card" style="border-color: var(--red); color: var(--red);">🛡 غرف العمليات X</div>
+<div class="ops-grid">
+    <button class="op-btn" onclick="showSec('constitution')">DATA_LINK_113</button>
+    <button class="op-btn">ENCRYPTION_MODE</button>
+    <button class="op-btn">PROTOCOL_X_RUN</button>
+    <button class="op-btn">TERMINATE_FALCON</button>
+    <button class="op-btn">KLJAT_SCANNER</button>
+    <button class="op-btn">ADMIN_VAULT</button>
+    <button class="op-btn">CORE_SYNC</button>
+    <button class="op-btn" onclick="showSec('services')">SERVICE_HUB</button>
 </div>
 
-<div id="intro" class="material-box" style="display: block;">
-    <h2 style="color: var(--cyan);">🏛️ ديباجة السيادة</h2>
-    <p style="line-height: 2; text-align: justify;">نعلن نحن القائد MAZIN-113255 عن تفعيل القبضة الحديدية... الولاء هو شرط البقاء، والكلجات ثغرة أمنية سيتم تطهيرها.</p>
-</div>
+<div id="home" class="container active-sec">
+    <h2 style="color: var(--cyan); border-bottom: 2px solid var(--cyan); padding-bottom: 10px;">🏛️ ديباجة السيادة العليا</h2>
+    <div style="white-space: pre-wrap; font-size: 1.1rem; text-align: justify;">
+بناءً على الصلاحيات المطلقة الممنوحة للقائد العام MAZIN-113255، نعلن تفعيل ميثاق "القبضة الحديدية". 
+هذا الموقع ليس مجرد صفحة، بل هو محرك إداري لضبط إيقاع المنظومة وتطهيرها من شوائب "الكلجات" وتمرّد "الصقور". 
 
-<div id="constitution" class="material-box">
-    <h2 style="text-align: center;">📂 أرشيف المواد (101 - 159)</h2>
-    <div class="grid-numbers" id="btns-container"></div>
-    <hr style="border-color: #111; margin: 25px 0;">
-    <div id="display-area" style="min-height: 200px; border-right: 3px solid var(--cyan); padding-right: 20px;">
-        <p style="color: #666;">اضغط على رقم المادة لعرض النص السيادي...</p>
+أنت الآن في النطاق السيادي المحمي.. الولاء هنا هو العملة الوحيدة المعترف بها.
     </div>
 </div>
 
+<div id="constitution" class="container">
+    <h2 style="text-align:center;">📂 الأرشيف الدستوري المحكم</h2>
+    <div class="mat-grid" id="mat-btns"></div>
+    <div id="mat-content" class="detail-card">
+        <p style="text-align:center; color: #555;">[ بانتظار فك تشفير المادة المحددة ]</p>
+    </div>
+</div>
+
+<div id="services" class="container">
+    <h2 style="color: var(--cyan);">🛠️ مركز الخدمات التقنية</h2>
+    <ul style="list-style: none; padding: 0;">
+        <li style="padding: 15px; border-bottom: 1px solid #222;">🔹 طلب ترقية رتبة (نخبة)</li>
+        <li style="padding: 15px; border-bottom: 1px solid #222;">🔹 فحص "كلجات" اللسان الرقمي</li>
+        <li style="padding: 15px; border-bottom: 1px solid #222;">🔹 إصدار هوية سيادية مشفرة</li>
+        <li style="padding: 15px; border-bottom: 1px solid #222;">🔹 بلاغ عن منشق (صقر)</li>
+    </ul>
+</div>
+
 <script>
-    const protocolData = {
-        101: { t: "المرجعية الإدارية العليا", n: "القائد MAZIN-113255 هو المرجع الأول والأخير.", h: "الإنهاء الفوري للعضوية عند التجاوز." },
-        102: { t: "التنظيم الهيكلي", n: "يُمنع إنشاء تكتلات تضعف الهيكل الإداري.", h: "الرقابة التقييمية لمدة 30 يوماً." },
-        103: { t: "حماية الأصول المعلوماتية", n: "الأكواد والمراسلات أصول سرية للغاية.", h: "الحظر التقني والملاحقة الإدارية." },
-        104: { t: "حماية الخصوصية الإدارية", n: "يمنع التدخل في الشؤون الشخصية أو استخدام البيانات.", h: "إنذار نهائي ثم سحب الهوية." },
-        105: { t: "بروتوكول التوثيق", n: "الدقة الكاملة في الاستمارة شرط أساسي.", h: "بطلان العضوية عند أي تزوير." },
-        106: { t: "الهوية الرسمية", n: "الكود الرقمي هو وسيلة إثبات الشخصية الوحيدة.", h: "إلغاء الكود واعتباره منتحلاً." },
-        107: { t: "الشفافية والبلاغات", n: "البلاغات الكيدية جريمة إدارية.", h: "نقل العقوبة للمبلغ في حال الكذب." },
-        108: { t: "مكافحة التزوير الرقمي", n: "يُحظر التلاعب بالتصاميم أو الرتب.", h: "قائمة 'المحرومين من الموثوقية'." },
-        109: { t: "التقييم الدوري", n: "تجميد الحساب عند الفشل في معايير الوقار.", h: "دورة تأهيلية إجبارية." },
-        110: { t: "التنسيق المشترك", n: "يمنع التواصل الخارجي باسم الجهاز دون تفويض.", h: "سحب الصفة الرسمية فوراً." },
-        111: { t: "السلوك العام والوقار", n: "الالتزام بالخطاب الراقي في النقاشات.", h: "تعليق العضوية لمدة أسبوع." },
-        112: { t: "مكافحة الفوضى", n: "يمنع نشر محتوى يثير البلبلة ضد الإدارة.", h: "الإقصاء الإداري الشامل." },
-        113: { t: "الطوارئ الإدارية", n: "للقائد حق تعطيل البنود وقت الأزمات.", h: "مخالفة الأوامر تُعد تمرداً." },
-        158: { t: "الوقار اللغوي (الكلجات)", n: "الإصرار على الأخطاء يُضعف هيبة المؤسسة.", h: "وضع الصمت حتى تقديم اعتذار وقور." },
-        159: { t: "مكافحة الترصد (الصقرجة)", n: "يُجرم الترصد لعثرات الآخرين بغرض الإساءة.", h: "الإعدام الرقمي التام ومحو البيانات." }
+    const fullData = {
+        101: { t: "المرجعية الإدارية العليا", n: "تُقر هذه المادة بأن القائد MAZIN-113255 هو المرجع الأول والأخير لجميع القرارات التنظيمية والتشريعية. لا يُعتد بأي إجراء إداري ما لم يحمل موافقة صريحة من الإدارة العليا.", h: "إنهاء العضوية فوراً وبشكل قطعي." },
+        102: { t: "التنظيم الهيكلي", n: "يتم توزيع المسؤوليات بناءً على الكفاءة والولاء التنظيمي. يُمنع منعاً باتاً إنشاء أي مجموعات ضغط أو تكتلات تهدف إلى إضعاف الهيكل الإداري العام.", h: "خفض الصلاحيات ووضع العضو تحت الرقابة لمدة 30 يوماً." },
+        103: { t: "حماية الأصول المعلوماتية", n: "تُصنف جميع الأكواد، قواعد البيانات، والمراسلات الداخلية كأصول سرية للغاية. يُحظر تداولها خارج النطاق المسموح به.", h: "الحظر التقني والملاحقة بتهمة إفشاء الأسرار." },
+        104: { t: "حماية الخصوصية الإدارية", n: "يمنع التدخل في الشؤون الشخصية للأعضاء أو استخدام البيانات الإدارية لأغراض خارج نطاق العمل الرسمي للجهاز.", h: "إنذار نهائي ثم سحب الهوية الرقمية." },
+        105: { t: "بروتوكول التوثيق والانتساب", n: "الالتزام بالدقة الكاملة في ملء الاستمارة المكونة من 10 خانات. أي كشط أو تزوير يجعل العضوية باطلة.", h: "رفض الانتساب ومنع استرداد الرسوم المعنوية." },
+        106: { t: "الهوية الرسمية", n: "يُعد الكود الرقمي الممنوح لكل عضو هو الوسيلة الوحيدة لإثبات الشخصية. يُمنع إعارة الهوية أو السماح للغير باستخدامها.", h: "إلغاء الكود فوراً واعتبار العضو منتحلاً." },
+        107: { t: "الشفافية والبلاغات", n: "يُشجع الجهاز على التبليغ عن التجاوزات. التبليغ الكيدي يُعامل كجريمة إدارية مستقلة.", h: "نقل العقوبة للمُبلغ في حال ثبت كذب البلاغ." },
+        108: { t: "مكافحة التزوير الرقمي", n: "يُحظر التلاعب بتصميم البطاقات السيادية أو تعديل الرتب في واجهة النظام دون تصريح من القائد.", h: "الحظر النهائي ووضع الاسم في قائمة المحرومين." },
+        109: { t: "التقييم الدوري", n: "يخضع جميع الأعضاء لتقييم دوري لضمان الالتزام بمعايير الوقار والإنتاجية الإدارية.", h: "تجميد الحساب حتى اجتياز دورة تأهيلية." },
+        110: { t: "التنسيق المشترك", n: "يمنع التواصل مع جهات خارجية باسم الجهاز دون تفويض رسمي مكتوب وموقع من القائد.", h: "سحب الصفة الرسمية واعتبار التصرفات شخصية." },
+        111: { t: "السلوك العام والوقار", n: "الالتزام بالآداب العامة والخطاب الراقي. يُمنع الانجرار خلف الاستفزازات الجانبية.", h: "لفت نظر يليه تعليق العضوية لمدة أسبوع." },
+        112: { t: "مكافحة الفوضى", n: "يُمنع نشر أي محتوى يهدف إلى إثارة البلبلة أو التشكيك في نزاهة الإدارة السيادية.", h: "الإقصاء الإداري وحذف السجلات من الأرشيف." },
+        113: { t: "الطوارئ الإدارية", n: "في حالات الأزمات، يحق للقائد تعطيل بعض البنود مؤقتاً واتخاذ إجراءات حازمة لحماية استقرار الجهاز.", h: "مخالفة الأوامر تُعد تمرداً وعقوبتها النفي." },
+        158: { t: "الوقار اللغوي (الكلجات)", n: "الخطأ اللغوي يتطلب المراجعة. الإصرار على الأخطاء الجسيمة يُضعف هيبة المؤسسة.", h: "وضع الصمت حتى تصحيح الخطأ وتقديم اعتذار وقور." },
+        159: { t: "مكافحة الترصد (الصقرجة)", n: "يُجرم الترصد لعثرات الآخرين وتوثيقها بغرض الإساءة. هذا يتنافى مع ميثاق الشرف.", h: "الإعدام الرقمي التام ومحو الهوية." }
     };
 
     function init() {
-        const container = document.getElementById('btns-container');
-        Object.keys(protocolData).forEach(num => {
-            let b = document.createElement('button');
-            b.className = 'num-btn'; b.innerText = num;
+        const grid = document.getElementById('mat-btns');
+        Object.keys(fullData).forEach(id => {
+            let b = document.createElement('div');
+            b.className = 'm-num'; b.innerText = id;
             b.onclick = () => {
-                document.querySelectorAll('.num-btn').forEach(x => x.classList.remove('active'));
+                document.querySelectorAll('.m-num').forEach(x => x.classList.remove('active'));
                 b.classList.add('active');
-                renderMat(num);
+                renderMat(id);
             };
-            container.appendChild(b);
+            grid.appendChild(b);
         });
     }
 
     function renderMat(id) {
-        const m = protocolData[id];
-        document.getElementById('display-area').innerHTML = `
-            <h3 style="color:var(--cyan)">🛡️ المادة (${id}): ${m.t}</h3>
-            <p><b>المضمون السيادي:</b> ${m.n}</p>
-            <p style="color:var(--red)"><b>الإجراء الجزائي:</b> ${m.h}</p>
-            <p style="font-size:0.8rem; border-top:1px solid #222; padding-top:10px;">توقيع: القائد MAZIN-113255</p>
+        const m = fullData[id];
+        document.getElementById('mat-content').innerHTML = `
+            <h3 style="color:var(--cyan); margin-top:0;">🛡️ المادة (${id}): ${m.t}</h3>
+            <p><b>المضمون:</b><br>${m.n}</p>
+            <p style="color:var(--red); border:1px solid var(--red); padding:10px; background:rgba(255,0,0,0.05);">
+                <b>القرار الجزائي:</b> ${m.h}
+            </p>
+            <p style="text-align:left; font-size:0.8rem; color:var(--gold);">AUTHENTICATED BY MAZIN-113255</p>
         `;
     }
 
     function showSec(id) {
-        document.querySelectorAll('.material-box').forEach(s => s.style.display = 'none');
-        document.getElementById(id).style.display = 'block';
+        document.querySelectorAll('.container').forEach(c => c.classList.remove('active-sec'));
+        document.getElementById(id).classList.add('active-sec');
+        window.scrollTo({top: 400, behavior: 'smooth'});
     }
 
     init();
